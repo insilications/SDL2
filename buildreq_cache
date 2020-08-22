@@ -1,7 +1,1 @@
 2.0.12
-dbus-dev
-glibc-staticdev
-libXScrnSaver-dev
-libsamplerate-dev
-pkg-config
-wayland-dev

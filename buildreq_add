@@ -1,4 +1,23 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+buildreq-cmake
+buildreq-qmake
+dbus-dev
+findutils
+gcc-dev32
+gcc-libgcc32
+gcc-libstdc++32
+glibc-dev32
+glibc-libc32
+glibc-staticdev
+libsamplerate-dev
+libsamplerate-staticdev
+libsamplerate-dev32
+libsamplerate-staticdev32
+libXScrnSaver-dev
 libXxf86vm-dev
 libXxf86vm-dev32
+pkg-config
+wayland-dev
+Vulkan-Headers-dev
+Vulkan-Loader-dev
