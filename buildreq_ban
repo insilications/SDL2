@@ -2,3 +2,5 @@
 # undesirable. One entry per line, no whitespace.
 buildreq-mvn
 gradle
+ibus
+ibus-dev

@@ -16,6 +16,9 @@ Group    : Development/Tools
 License  : GPL-3.0 Zlib
 BuildRequires : Vulkan-Headers-dev
 BuildRequires : Vulkan-Loader-dev
+BuildRequires : alsa-lib-dev
+BuildRequires : alsa-lib-lib
+BuildRequires : alsa-tools
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-qmake
 BuildRequires : cairo-lib
@@ -30,8 +33,11 @@ BuildRequires : freetype-lib
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
+BuildRequires : glib
 BuildRequires : glib-bin
 BuildRequires : glib-data
+BuildRequires : glib-dev
+BuildRequires : glib-dev32
 BuildRequires : glib-lib
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
@@ -44,6 +50,7 @@ BuildRequires : icu4c-lib
 BuildRequires : libX11-data
 BuildRequires : libX11-dev
 BuildRequires : libX11-lib
+BuildRequires : libXScrnSaver
 BuildRequires : libXScrnSaver-dev
 BuildRequires : libXScrnSaver-lib
 BuildRequires : libXau-lib
@@ -58,7 +65,9 @@ BuildRequires : libXtst-lib
 BuildRequires : libXxf86vm-dev
 BuildRequires : libXxf86vm-dev32
 BuildRequires : libXxf86vm-lib
+BuildRequires : libcap-ng-dev
 BuildRequires : libdrm-lib
+BuildRequires : libffi
 BuildRequires : libinput-data
 BuildRequires : libinput-lib
 BuildRequires : libinput-libexec
@@ -69,13 +78,28 @@ BuildRequires : libsamplerate-dev
 BuildRequires : libsamplerate-dev32
 BuildRequires : libsamplerate-staticdev
 BuildRequires : libsamplerate-staticdev32
+BuildRequires : libunwind
+BuildRequires : libunwind-dev
+BuildRequires : libunwind-dev32
 BuildRequires : libusb
 BuildRequires : libusb-dev
 BuildRequires : libusb-dev32
 BuildRequires : libxcb-lib
+BuildRequires : libxml2-dev
+BuildRequires : libxml2-staticdev
 BuildRequires : libxvid-staticdev
-BuildRequires : llvm-lib
+BuildRequires : libzimg-dev
+BuildRequires : libzimg-staticdev
+BuildRequires : lz4
+BuildRequires : lz4-dev
+BuildRequires : lz4-staticdev
+BuildRequires : lzo
+BuildRequires : lzo-dev
+BuildRequires : lzo-staticdev
+BuildRequires : mesa
 BuildRequires : mesa-demos
+BuildRequires : mesa-dev
+BuildRequires : mesa-lib
 BuildRequires : nvidia
 BuildRequires : nvidia-dev
 BuildRequires : nvidia-lib
@@ -83,16 +107,23 @@ BuildRequires : openssl-lib
 BuildRequires : p11-kit
 BuildRequires : p11-kit-dev
 BuildRequires : pango-lib
+BuildRequires : pcre-dev
+BuildRequires : pcre-staticdev
 BuildRequires : pixman-lib
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(32alsa)
 BuildRequires : pkgconfig(32dbus-1)
+BuildRequires : pkgconfig(32dri)
 BuildRequires : pkgconfig(32egl)
 BuildRequires : pkgconfig(32gbm)
+BuildRequires : pkgconfig(32gl)
+BuildRequires : pkgconfig(32glesv1_cm)
+BuildRequires : pkgconfig(32glesv2)
 BuildRequires : pkgconfig(32libdrm)
 BuildRequires : pkgconfig(32libpulse-simple)
 BuildRequires : pkgconfig(32libudev)
 BuildRequires : pkgconfig(32libusb-1.0)
+BuildRequires : pkgconfig(32osmesa)
 BuildRequires : pkgconfig(32samplerate)
 BuildRequires : pkgconfig(32wayland-client)
 BuildRequires : pkgconfig(32wayland-cursor)
@@ -100,21 +131,28 @@ BuildRequires : pkgconfig(32wayland-egl)
 BuildRequires : pkgconfig(32wayland-protocols)
 BuildRequires : pkgconfig(32wayland-scanner)
 BuildRequires : pkgconfig(32x11)
+BuildRequires : pkgconfig(32xatracker)
 BuildRequires : pkgconfig(32xcursor)
 BuildRequires : pkgconfig(32xext)
 BuildRequires : pkgconfig(32xi)
 BuildRequires : pkgconfig(32xinerama)
 BuildRequires : pkgconfig(32xkbcommon)
 BuildRequires : pkgconfig(32xrandr)
+BuildRequires : pkgconfig(32xscrnsaver)
 BuildRequires : pkgconfig(alsa)
+BuildRequires : pkgconfig(alsa-topology)
 BuildRequires : pkgconfig(dbus-1)
+BuildRequires : pkgconfig(dri)
 BuildRequires : pkgconfig(egl)
 BuildRequires : pkgconfig(gbm)
-BuildRequires : pkgconfig(ibus-1.0)
+BuildRequires : pkgconfig(gl)
+BuildRequires : pkgconfig(glesv1_cm)
+BuildRequires : pkgconfig(glesv2)
 BuildRequires : pkgconfig(libdrm)
 BuildRequires : pkgconfig(libpulse-simple)
 BuildRequires : pkgconfig(libudev)
 BuildRequires : pkgconfig(libusb-1.0)
+BuildRequires : pkgconfig(osmesa)
 BuildRequires : pkgconfig(samplerate)
 BuildRequires : pkgconfig(vulkan)
 BuildRequires : pkgconfig(wayland-client)
@@ -123,15 +161,25 @@ BuildRequires : pkgconfig(wayland-egl)
 BuildRequires : pkgconfig(wayland-protocols)
 BuildRequires : pkgconfig(wayland-scanner)
 BuildRequires : pkgconfig(x11)
+BuildRequires : pkgconfig(xatracker)
 BuildRequires : pkgconfig(xcursor)
 BuildRequires : pkgconfig(xext)
 BuildRequires : pkgconfig(xi)
 BuildRequires : pkgconfig(xinerama)
 BuildRequires : pkgconfig(xkbcommon)
 BuildRequires : pkgconfig(xrandr)
+BuildRequires : pkgconfig(xscrnsaver)
+BuildRequires : pulseaudio
+BuildRequires : pulseaudio-dev
+BuildRequires : systemd
+BuildRequires : systemd-dev
+BuildRequires : util-linux
+BuildRequires : util-linux-dev
+BuildRequires : util-linux-staticdev
 BuildRequires : wayland
 BuildRequires : wayland-dev
 BuildRequires : weston
+BuildRequires : wmctrl
 BuildRequires : xauth
 BuildRequires : xclip
 BuildRequires : xdg-desktop-portal
@@ -174,6 +222,14 @@ BuildRequires : xsetroot
 BuildRequires : xvfb-run
 BuildRequires : xwd
 BuildRequires : xwininfo
+BuildRequires : xz
+BuildRequires : xz-dev
+BuildRequires : xz-staticdev
+BuildRequires : zlib
+BuildRequires : zlib-dev
+BuildRequires : zlib-staticdev
+BuildRequires : zstd-dev
+BuildRequires : zstd-staticdev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -192,27 +248,27 @@ unset http_proxy
 unset https_proxy
 unset no_proxy
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598150054
+export SOURCE_DATE_EPOCH=1598184195
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
 export PGO_GEN="-fprofile-generate=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-arcs -ftest-coverage --coverage -fprofile-partial-training"
-export CFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
-export FCFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
-export FFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
-export CXXFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects $PGO_GEN"
-export LDFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
+export CFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition -DHAVE_OPENGL $PGO_GEN"
+export FCFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition $PGO_GEN"
+export FFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition $PGO_GEN"
+export CXXFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition $PGO_GEN"
+export LDFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -fno-semantic-interposition $PGO_GEN"
 ## pgo use
-## -ffat-lto-objects -fno-PIE -fno-PIE -m64 -no-pie -fpic -fvisibility=hidden -flto-partition=none
+## -ffat-lto-objects -fno-PIE -fno-PIE -m64 -no-pie -fpic -fvisibility=hidden -flto-partition=none  -fno-semantic-interposition -fno-plt
 ## gcc: -feliminate-unused-debug-types -fipa-pta -flto=16 -Wno-error -Wp,-D_REENTRANT -fno-common
 export PGO_USE="-fprofile-use=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-correction -fprofile-partial-training"
-export CFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects $PGO_USE"
-export FCFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects $PGO_USE"
-export FFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects $PGO_USE"
-export CXXFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects $PGO_USE"
-export LDFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects $PGO_USE"
+export CFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition -fno-plt $PGO_USE"
+export FCFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition -fno-plt $PGO_USE"
+export FFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition -fno-plt $PGO_USE"
+export CXXFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition -fno-plt $PGO_USE"
+export LDFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -fno-semantic-interposition -fno-plt $PGO_USE"
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -224,7 +280,17 @@ export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/n
 export PATH="/usr/cuda/bin:/usr/nvidia/bin:$PATH"
 #export CCACHE_DISABLE=1
 export DISPLAY=:0
-#export XDG_RUNTIME_DIR=/tmp/runtime-root
+export XDG_CONFIG_DIRS=/usr/share/xdg:/etc/xdg
+export XDG_SEAT=seat0
+export XDG_SESSION_TYPE=tty
+export XDG_CURRENT_DESKTOP=KDE
+export XDG_SESSION_CLASS=user
+export XDG_VTNR=1
+export XDG_SESSION_ID=1
+export XDG_RUNTIME_DIR=/run/user/1000
+export LIBGL_ALWAYS_INDIRECT=1
+export __GL_ALLOW_UNOFFICIAL_PROTOCOL=1
+export __GL_SYNC_TO_VBLANK=0
 export VDPAU_DRIVER="nvidia"
 export LIBVA_DRIVER_NAME="vdpau"
 export LIBVA_DRIVERS_PATH="/usr/lib64/dri"
@@ -234,18 +300,33 @@ export CXXFLAGS="${CXXFLAGS_GENERATE}"
 export FFLAGS="${FFLAGS_GENERATE}"
 export FCFLAGS="${FCFLAGS_GENERATE}"
 export LDFLAGS="${LDFLAGS_GENERATE}"
-%cmake .. -DSDL_SHARED=1 -DSDL_STATIC=1 -DALSA_SHARED=1 -DX11_SHARED=1 -DPULSEAUDIO_SHARED=1 -DLIBSAMPLERATE=1 -DBUILD_TOOLS=1 -DSDL_TEST=1 -DRPATH=0 -DSDL_DLOPEN=1 -DVIDEO_VULKAN=1 -DSDL_VIDEO_VULKAN=1 -DASSEMBLY=1 -DSSEMATH=1 -DVIDEO_WAYLAND=1 -DVIDEO_KMSDRM=1 -DKMSDRM_SHARED=1 -DBUILD_SHARED_LIBS=1 -DBUILD_STATIC_LIBS=1 -DCMAKE_BUILD_TYPE=Release
+%cmake ..   -DSDL_SHARED=ON -DSDL_STATIC=ON -DALSA_SHARED=ON -DPULSEAUDIO=ON -DPULSEAUDIO_SHARED=ON -DLIBSAMPLERATE=ON -DVIDEO_OPENGL=ON -DVIDEO_OPENGLES=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DBUILD_TOOLS=ON -DSDL_TEST=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DVIDEO_VULKAN=ON -DSDL_VIDEO_VULKAN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
 make  %{?_smp_mflags}
 
 pushd test
 export DISPLAY=:0
+export XDG_CONFIG_DIRS=/usr/share/xdg:/etc/xdg
+export XDG_SEAT=seat0
+export XDG_SESSION_TYPE=tty
+export XDG_CURRENT_DESKTOP=KDE
+export XDG_SESSION_CLASS=user
+export XDG_VTNR=1
+export XDG_SESSION_ID=1
+export XDG_RUNTIME_DIR=/run/user/1000
+export LIBGL_ALWAYS_INDIRECT=1
+export __GL_ALLOW_UNOFFICIAL_PROTOCOL=1
+export __GL_SYNC_TO_VBLANK=0
 export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
-glxinfo || :
 ./testautomation || :
-timeout 10 ./testdraw2 || :
-timeout 10 ./testsprite2 || :
-timeout 10 ./testvulkan || :
-timeout 10 ./testgles2 || :
+timeout 6 ./testdraw2 || :
+timeout 6 ./testsprite2 || :
+timeout 6 ./testgles2 || :
+timeout 6 ./testgl2 || :
+timeout 6 ./testshader || :
+timeout 6 ./testvulkan || :
+timeout 6 ./testnative || :
+./testmultiaudio || :
+glxinfo || :
 popd
 find . -type f -not -name '*.gcno' -delete -print
 export CFLAGS="${CFLAGS_USE}"
@@ -253,7 +334,7 @@ export CXXFLAGS="${CXXFLAGS_USE}"
 export FFLAGS="${FFLAGS_USE}"
 export FCFLAGS="${FCFLAGS_USE}"
 export LDFLAGS="${LDFLAGS_USE}"
-%cmake .. -DSDL_SHARED=1 -DSDL_STATIC=1 -DALSA_SHARED=1 -DX11_SHARED=1 -DPULSEAUDIO_SHARED=1 -DLIBSAMPLERATE=1 -DBUILD_TOOLS=1 -DSDL_TEST=1 -DRPATH=0 -DSDL_DLOPEN=1 -DVIDEO_VULKAN=1 -DSDL_VIDEO_VULKAN=1 -DASSEMBLY=1 -DSSEMATH=1 -DVIDEO_WAYLAND=1 -DVIDEO_KMSDRM=1 -DKMSDRM_SHARED=1 -DBUILD_SHARED_LIBS=1 -DBUILD_STATIC_LIBS=1 -DCMAKE_BUILD_TYPE=Release
+%cmake ..   -DSDL_SHARED=ON -DSDL_STATIC=ON -DALSA_SHARED=ON -DPULSEAUDIO=ON -DPULSEAUDIO_SHARED=ON -DLIBSAMPLERATE=ON -DVIDEO_OPENGL=ON -DVIDEO_OPENGLES=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DBUILD_TOOLS=ON -DSDL_TEST=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DVIDEO_VULKAN=ON -DSDL_VIDEO_VULKAN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
 make  %{?_smp_mflags}
 popd
 mkdir -p clr-build32
@@ -264,18 +345,19 @@ export LDFLAGS="-g -O3 -fuse-linker-plugin -pipe"
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
+unset LD_LIBRARY_PATH
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
 export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
 export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%cmake -DLIB_INSTALL_DIR:PATH=/usr/lib32 -DCMAKE_INSTALL_LIBDIR=/usr/lib32 -DLIB_SUFFIX=32 .. -DSDL_SHARED=1 -DSDL_STATIC=1 -DALSA_SHARED=1 -DX11_SHARED=1 -DPULSEAUDIO_SHARED=1 -DLIBSAMPLERATE=1 -DBUILD_TOOLS=1 -DSDL_TEST=1 -DRPATH=0 -DSDL_DLOPEN=1 -DVIDEO_VULKAN=1 -DSDL_VIDEO_VULKAN=1 -DASSEMBLY=1 -DSSEMATH=1 -DVIDEO_WAYLAND=1 -DVIDEO_KMSDRM=1 -DKMSDRM_SHARED=1 -DBUILD_SHARED_LIBS=1 -DBUILD_STATIC_LIBS=1 -DCMAKE_BUILD_TYPE=Release
+%cmake -DLIB_INSTALL_DIR:PATH=/usr/lib32 -DCMAKE_INSTALL_LIBDIR=/usr/lib32 -DLIB_SUFFIX=32 ..   -DSDL_SHARED=ON -DSDL_STATIC=OFF -DALSA_SHARED=ON -DPULSEAUDIO=ON -DBUILD_TOOLS=ON -DSDL_TEST=ON -DRPATH=OFF -DPULSEAUDIO_SHARED=ON -DVIDEO_OPENGL=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
 make  %{?_smp_mflags}
 unset PKG_CONFIG_PATH
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1598150054
+export SOURCE_DATE_EPOCH=1598184195
 rm -rf %{buildroot}
 pushd clr-build32
 %make_install32

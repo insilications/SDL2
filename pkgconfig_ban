@@ -1,24 +1,30 @@
 # This file contains pkgconfig build requirements that get picked up
 # but are undesirable. One entry per line, no whitespace.
-mircommon
-mirclient
-esound
-32mircommon
-32mirclient
-32esound
-jack
-32jack
+# 32gl
+# gl
+# 32alsa
 32bcm_host
 32brcmegl
 32directfb
-32fusionsound
-bcm_host
-brcmegl
-fusionsound
-32fox17
-fox17
-fcitx
+32esound
 32fcitx
 32ibus-1.0
-libusb
+ibus-1.0
+32fox17
+32fusionsound
+32jack
 32libusb
+32mirclient
+32mircommon
+# alsa
+bcm_host
+brcmegl
+directfb
+esound
+fcitx
+fox17
+fusionsound
+jack
+libusb
+mirclient
+mircommon
