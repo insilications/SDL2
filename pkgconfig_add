@@ -27,6 +27,8 @@ alsa
 32xrandr
 32xscrnsaver
 dbus-1
+libunwind-generic
+libunwind
 dri
 egl
 gbm
