@@ -4,48 +4,101 @@
 #
 # Source0 file verified with key 0x30A59377A7763BE6 (slouken@libsdl.org)
 #
+%define keepstatic 1
 Name     : SDL2
 Version  : 2.0.12
-Release  : 39
+Release  : 40
 URL      : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
 Source0  : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
 Source1  : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz.sig
 Summary  : Simple DirectMedia Layer
 Group    : Development/Tools
 License  : GPL-3.0 Zlib
-Requires: SDL2-bin = %{version}-%{release}
-Requires: SDL2-lib = %{version}-%{release}
 BuildRequires : Vulkan-Headers-dev
 BuildRequires : Vulkan-Loader-dev
 BuildRequires : buildreq-cmake
-BuildRequires : buildreq-configure
 BuildRequires : buildreq-qmake
+BuildRequires : cairo-lib
+BuildRequires : cuda
+BuildRequires : cuda-dev
+BuildRequires : cuda-staticdev
 BuildRequires : dbus-dev
 BuildRequires : findutils
+BuildRequires : fontconfig-data
+BuildRequires : fontconfig-lib
+BuildRequires : freetype-lib
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
+BuildRequires : glib-bin
+BuildRequires : glib-data
+BuildRequires : glib-lib
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
 BuildRequires : glibc-staticdev
+BuildRequires : gtk+-data
+BuildRequires : gtk+-lib
+BuildRequires : gtk3-lib
+BuildRequires : harfbuzz-lib
+BuildRequires : icu4c-lib
+BuildRequires : libX11-data
+BuildRequires : libX11-dev
+BuildRequires : libX11-lib
 BuildRequires : libXScrnSaver-dev
+BuildRequires : libXScrnSaver-lib
+BuildRequires : libXau-lib
+BuildRequires : libXcursor-lib
+BuildRequires : libXdamage-lib
+BuildRequires : libXdmcp-lib
+BuildRequires : libXext-lib
+BuildRequires : libXft-lib
+BuildRequires : libXi-lib
+BuildRequires : libXrender-lib
+BuildRequires : libXtst-lib
 BuildRequires : libXxf86vm-dev
 BuildRequires : libXxf86vm-dev32
+BuildRequires : libXxf86vm-lib
+BuildRequires : libdrm-lib
+BuildRequires : libinput-data
+BuildRequires : libinput-lib
+BuildRequires : libinput-libexec
+BuildRequires : libpciaccess
+BuildRequires : libpciaccess-dev
+BuildRequires : libpng-lib
 BuildRequires : libsamplerate-dev
 BuildRequires : libsamplerate-dev32
 BuildRequires : libsamplerate-staticdev
 BuildRequires : libsamplerate-staticdev32
+BuildRequires : libusb
+BuildRequires : libusb-dev
+BuildRequires : libusb-dev32
+BuildRequires : libxcb-lib
+BuildRequires : libxvid-staticdev
+BuildRequires : llvm-lib
+BuildRequires : mesa-demos
+BuildRequires : nvidia
+BuildRequires : nvidia-dev
+BuildRequires : nvidia-lib
+BuildRequires : openssl-lib
+BuildRequires : p11-kit
+BuildRequires : p11-kit-dev
+BuildRequires : pango-lib
+BuildRequires : pixman-lib
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(32alsa)
 BuildRequires : pkgconfig(32dbus-1)
+BuildRequires : pkgconfig(32egl)
 BuildRequires : pkgconfig(32gbm)
-BuildRequires : pkgconfig(32gl)
 BuildRequires : pkgconfig(32libdrm)
 BuildRequires : pkgconfig(32libpulse-simple)
 BuildRequires : pkgconfig(32libudev)
 BuildRequires : pkgconfig(32libusb-1.0)
 BuildRequires : pkgconfig(32samplerate)
+BuildRequires : pkgconfig(32wayland-client)
+BuildRequires : pkgconfig(32wayland-cursor)
+BuildRequires : pkgconfig(32wayland-egl)
 BuildRequires : pkgconfig(32wayland-protocols)
+BuildRequires : pkgconfig(32wayland-scanner)
 BuildRequires : pkgconfig(32x11)
 BuildRequires : pkgconfig(32xcursor)
 BuildRequires : pkgconfig(32xext)
@@ -55,8 +108,8 @@ BuildRequires : pkgconfig(32xkbcommon)
 BuildRequires : pkgconfig(32xrandr)
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(dbus-1)
+BuildRequires : pkgconfig(egl)
 BuildRequires : pkgconfig(gbm)
-BuildRequires : pkgconfig(gl)
 BuildRequires : pkgconfig(ibus-1.0)
 BuildRequires : pkgconfig(libdrm)
 BuildRequires : pkgconfig(libpulse-simple)
@@ -64,7 +117,11 @@ BuildRequires : pkgconfig(libudev)
 BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(samplerate)
 BuildRequires : pkgconfig(vulkan)
+BuildRequires : pkgconfig(wayland-client)
+BuildRequires : pkgconfig(wayland-cursor)
+BuildRequires : pkgconfig(wayland-egl)
 BuildRequires : pkgconfig(wayland-protocols)
+BuildRequires : pkgconfig(wayland-scanner)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xcursor)
 BuildRequires : pkgconfig(xext)
@@ -72,7 +129,51 @@ BuildRequires : pkgconfig(xi)
 BuildRequires : pkgconfig(xinerama)
 BuildRequires : pkgconfig(xkbcommon)
 BuildRequires : pkgconfig(xrandr)
+BuildRequires : wayland
 BuildRequires : wayland-dev
+BuildRequires : weston
+BuildRequires : xauth
+BuildRequires : xclip
+BuildRequires : xdg-desktop-portal
+BuildRequires : xdg-desktop-portal-gtk
+BuildRequires : xdg-desktop-portal-kde
+BuildRequires : xdg-user-dirs
+BuildRequires : xdg-user-dirs-gtk
+BuildRequires : xdg-utils
+BuildRequires : xdotool
+BuildRequires : xdpyinfo
+BuildRequires : xf86-input-libinput
+BuildRequires : xf86-video-amdgpu
+BuildRequires : xf86-video-ati
+BuildRequires : xf86-video-fbdev
+BuildRequires : xf86-video-nouveau
+BuildRequires : xf86-video-qxl
+BuildRequires : xf86-video-vboxvideo
+BuildRequires : xf86-video-vesa
+BuildRequires : xf86-video-vmware
+BuildRequires : xfontsel
+BuildRequires : xhost
+BuildRequires : xinit
+BuildRequires : xinput
+BuildRequires : xkbcomp
+BuildRequires : xkeyboard-config
+BuildRequires : xkill
+BuildRequires : xmodmap
+BuildRequires : xorg-server
+BuildRequires : xorg-server-dev
+BuildRequires : xorgproto
+BuildRequires : xorgproto-dev
+BuildRequires : xprop
+BuildRequires : xrandr
+BuildRequires : xrdb
+BuildRequires : xrdp
+BuildRequires : xrestop
+BuildRequires : xsel
+BuildRequires : xset
+BuildRequires : xsetroot
+BuildRequires : xvfb-run
+BuildRequires : xwd
+BuildRequires : xwininfo
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -82,66 +183,18 @@ This is the Simple DirectMedia Layer, a generic API that provides low
 level access to audio, keyboard, mouse, and display framebuffer across
 multiple platforms.
 
-%package bin
-Summary: bin components for the SDL2 package.
-Group: Binaries
-
-%description bin
-bin components for the SDL2 package.
-
-
-%package dev
-Summary: dev components for the SDL2 package.
-Group: Development
-Requires: SDL2-lib = %{version}-%{release}
-Requires: SDL2-bin = %{version}-%{release}
-Provides: SDL2-devel = %{version}-%{release}
-Requires: SDL2 = %{version}-%{release}
-
-%description dev
-dev components for the SDL2 package.
-
-
-%package dev32
-Summary: dev32 components for the SDL2 package.
-Group: Default
-Requires: SDL2-lib32 = %{version}-%{release}
-Requires: SDL2-bin = %{version}-%{release}
-Requires: SDL2-dev = %{version}-%{release}
-
-%description dev32
-dev32 components for the SDL2 package.
-
-
-%package lib
-Summary: lib components for the SDL2 package.
-Group: Libraries
-
-%description lib
-lib components for the SDL2 package.
-
-
-%package lib32
-Summary: lib32 components for the SDL2 package.
-Group: Default
-
-%description lib32
-lib32 components for the SDL2 package.
-
-
 %prep
 %setup -q -n SDL2-2.0.12
 cd %{_builddir}/SDL2-2.0.12
-pushd ..
-cp -a SDL2-2.0.12 build32
-popd
 
 %build
 unset http_proxy
 unset https_proxy
 unset no_proxy
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598137445
+export SOURCE_DATE_EPOCH=1598150054
+mkdir -p clr-build
+pushd clr-build
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -164,26 +217,47 @@ export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 #export CCACHE_DISABLE=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
+export PATH="/usr/cuda/bin:/usr/nvidia/bin:$PATH"
+#export CCACHE_DISABLE=1
+export DISPLAY=:0
+#export XDG_RUNTIME_DIR=/tmp/runtime-root
+export VDPAU_DRIVER="nvidia"
+export LIBVA_DRIVER_NAME="vdpau"
+export LIBVA_DRIVERS_PATH="/usr/lib64/dri"
 ## altflags_pgo end
 export CFLAGS="${CFLAGS_GENERATE}"
 export CXXFLAGS="${CXXFLAGS_GENERATE}"
 export FFLAGS="${FFLAGS_GENERATE}"
 export FCFLAGS="${FCFLAGS_GENERATE}"
 export LDFLAGS="${LDFLAGS_GENERATE}"
- %configure --enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio-shared  --enable-alsa --enable-video-wayland --enable-assembly --enable-video-vulkan --disable-rpath
+%cmake .. -DSDL_SHARED=1 -DSDL_STATIC=1 -DALSA_SHARED=1 -DX11_SHARED=1 -DPULSEAUDIO_SHARED=1 -DLIBSAMPLERATE=1 -DBUILD_TOOLS=1 -DSDL_TEST=1 -DRPATH=0 -DSDL_DLOPEN=1 -DVIDEO_VULKAN=1 -DSDL_VIDEO_VULKAN=1 -DASSEMBLY=1 -DSSEMATH=1 -DVIDEO_WAYLAND=1 -DVIDEO_KMSDRM=1 -DKMSDRM_SHARED=1 -DBUILD_SHARED_LIBS=1 -DBUILD_STATIC_LIBS=1 -DCMAKE_BUILD_TYPE=Release
 make  %{?_smp_mflags}
 
-make -j16 VERBOSE=1 V=1 check || :
-make clean
+pushd test
+export DISPLAY=:0
+export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
+glxinfo || :
+./testautomation || :
+timeout 10 ./testdraw2 || :
+timeout 10 ./testsprite2 || :
+timeout 10 ./testvulkan || :
+timeout 10 ./testgles2 || :
+popd
+find . -type f -not -name '*.gcno' -delete -print
 export CFLAGS="${CFLAGS_USE}"
 export CXXFLAGS="${CXXFLAGS_USE}"
 export FFLAGS="${FFLAGS_USE}"
 export FCFLAGS="${FCFLAGS_USE}"
 export LDFLAGS="${LDFLAGS_USE}"
-%configure --enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio-shared  --enable-alsa --enable-video-wayland --enable-assembly --enable-video-vulkan --disable-rpath
+%cmake .. -DSDL_SHARED=1 -DSDL_STATIC=1 -DALSA_SHARED=1 -DX11_SHARED=1 -DPULSEAUDIO_SHARED=1 -DLIBSAMPLERATE=1 -DBUILD_TOOLS=1 -DSDL_TEST=1 -DRPATH=0 -DSDL_DLOPEN=1 -DVIDEO_VULKAN=1 -DSDL_VIDEO_VULKAN=1 -DASSEMBLY=1 -DSSEMATH=1 -DVIDEO_WAYLAND=1 -DVIDEO_KMSDRM=1 -DKMSDRM_SHARED=1 -DBUILD_SHARED_LIBS=1 -DBUILD_STATIC_LIBS=1 -DCMAKE_BUILD_TYPE=Release
 make  %{?_smp_mflags}
-
-pushd ../build32/
+popd
+mkdir -p clr-build32
+pushd clr-build32
 export CFLAGS="-g -O3 -fuse-linker-plugin -pipe"
 export CXXFLAGS="-g -O3 -fuse-linker-plugin -fvisibility-inlines-hidden -pipe"
 export LDFLAGS="-g -O3 -fuse-linker-plugin -pipe"
@@ -195,14 +269,15 @@ export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
 export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%configure --enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio-shared  --enable-alsa --enable-video-wayland --enable-assembly --enable-video-vulkan --disable-rpath  --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+%cmake -DLIB_INSTALL_DIR:PATH=/usr/lib32 -DCMAKE_INSTALL_LIBDIR=/usr/lib32 -DLIB_SUFFIX=32 .. -DSDL_SHARED=1 -DSDL_STATIC=1 -DALSA_SHARED=1 -DX11_SHARED=1 -DPULSEAUDIO_SHARED=1 -DLIBSAMPLERATE=1 -DBUILD_TOOLS=1 -DSDL_TEST=1 -DRPATH=0 -DSDL_DLOPEN=1 -DVIDEO_VULKAN=1 -DSDL_VIDEO_VULKAN=1 -DASSEMBLY=1 -DSSEMATH=1 -DVIDEO_WAYLAND=1 -DVIDEO_KMSDRM=1 -DKMSDRM_SHARED=1 -DBUILD_SHARED_LIBS=1 -DBUILD_STATIC_LIBS=1 -DCMAKE_BUILD_TYPE=Release
 make  %{?_smp_mflags}
+unset PKG_CONFIG_PATH
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1598137445
+export SOURCE_DATE_EPOCH=1598150054
 rm -rf %{buildroot}
-pushd ../build32/
+pushd clr-build32
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
 then
@@ -211,111 +286,9 @@ for i in *.pc ; do ln -s $i 32$i ; done
 popd
 fi
 popd
+pushd clr-build
 %make_install
+popd
 
 %files
 %defattr(-,root,root,-)
-
-%files bin
-%defattr(-,root,root,-)
-/usr/bin/sdl2-config
-
-%files dev
-%defattr(-,root,root,-)
-/usr/include/SDL2/SDL.h
-/usr/include/SDL2/SDL_assert.h
-/usr/include/SDL2/SDL_atomic.h
-/usr/include/SDL2/SDL_audio.h
-/usr/include/SDL2/SDL_bits.h
-/usr/include/SDL2/SDL_blendmode.h
-/usr/include/SDL2/SDL_clipboard.h
-/usr/include/SDL2/SDL_config.h
-/usr/include/SDL2/SDL_cpuinfo.h
-/usr/include/SDL2/SDL_egl.h
-/usr/include/SDL2/SDL_endian.h
-/usr/include/SDL2/SDL_error.h
-/usr/include/SDL2/SDL_events.h
-/usr/include/SDL2/SDL_filesystem.h
-/usr/include/SDL2/SDL_gamecontroller.h
-/usr/include/SDL2/SDL_gesture.h
-/usr/include/SDL2/SDL_haptic.h
-/usr/include/SDL2/SDL_hints.h
-/usr/include/SDL2/SDL_joystick.h
-/usr/include/SDL2/SDL_keyboard.h
-/usr/include/SDL2/SDL_keycode.h
-/usr/include/SDL2/SDL_loadso.h
-/usr/include/SDL2/SDL_log.h
-/usr/include/SDL2/SDL_main.h
-/usr/include/SDL2/SDL_messagebox.h
-/usr/include/SDL2/SDL_metal.h
-/usr/include/SDL2/SDL_mouse.h
-/usr/include/SDL2/SDL_mutex.h
-/usr/include/SDL2/SDL_name.h
-/usr/include/SDL2/SDL_opengl.h
-/usr/include/SDL2/SDL_opengl_glext.h
-/usr/include/SDL2/SDL_opengles.h
-/usr/include/SDL2/SDL_opengles2.h
-/usr/include/SDL2/SDL_opengles2_gl2.h
-/usr/include/SDL2/SDL_opengles2_gl2ext.h
-/usr/include/SDL2/SDL_opengles2_gl2platform.h
-/usr/include/SDL2/SDL_opengles2_khrplatform.h
-/usr/include/SDL2/SDL_pixels.h
-/usr/include/SDL2/SDL_platform.h
-/usr/include/SDL2/SDL_power.h
-/usr/include/SDL2/SDL_quit.h
-/usr/include/SDL2/SDL_rect.h
-/usr/include/SDL2/SDL_render.h
-/usr/include/SDL2/SDL_revision.h
-/usr/include/SDL2/SDL_rwops.h
-/usr/include/SDL2/SDL_scancode.h
-/usr/include/SDL2/SDL_sensor.h
-/usr/include/SDL2/SDL_shape.h
-/usr/include/SDL2/SDL_stdinc.h
-/usr/include/SDL2/SDL_surface.h
-/usr/include/SDL2/SDL_system.h
-/usr/include/SDL2/SDL_syswm.h
-/usr/include/SDL2/SDL_test.h
-/usr/include/SDL2/SDL_test_assert.h
-/usr/include/SDL2/SDL_test_common.h
-/usr/include/SDL2/SDL_test_compare.h
-/usr/include/SDL2/SDL_test_crc32.h
-/usr/include/SDL2/SDL_test_font.h
-/usr/include/SDL2/SDL_test_fuzzer.h
-/usr/include/SDL2/SDL_test_harness.h
-/usr/include/SDL2/SDL_test_images.h
-/usr/include/SDL2/SDL_test_log.h
-/usr/include/SDL2/SDL_test_md5.h
-/usr/include/SDL2/SDL_test_memory.h
-/usr/include/SDL2/SDL_test_random.h
-/usr/include/SDL2/SDL_thread.h
-/usr/include/SDL2/SDL_timer.h
-/usr/include/SDL2/SDL_touch.h
-/usr/include/SDL2/SDL_types.h
-/usr/include/SDL2/SDL_version.h
-/usr/include/SDL2/SDL_video.h
-/usr/include/SDL2/SDL_vulkan.h
-/usr/include/SDL2/begin_code.h
-/usr/include/SDL2/close_code.h
-/usr/lib64/cmake/SDL2/sdl2-config-version.cmake
-/usr/lib64/cmake/SDL2/sdl2-config.cmake
-/usr/lib64/libSDL2.so
-/usr/lib64/pkgconfig/sdl2.pc
-/usr/share/aclocal/*.m4
-
-%files dev32
-%defattr(-,root,root,-)
-/usr/lib32/cmake/SDL2/sdl2-config-version.cmake
-/usr/lib32/cmake/SDL2/sdl2-config.cmake
-/usr/lib32/libSDL2.so
-/usr/lib32/pkgconfig/32sdl2.pc
-/usr/lib32/pkgconfig/sdl2.pc
-
-%files lib
-%defattr(-,root,root,-)
-/usr/lib64/libSDL2-2.0.so.0
-/usr/lib64/libSDL2-2.0.so.0.12.0
-
-%files lib32
-%defattr(-,root,root,-)
-/usr/lib32/libSDL2-2.0.so.0
-/usr/lib32/libSDL2-2.0.so.0.12.0
