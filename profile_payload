@@ -18,8 +18,8 @@ timeout 6 ./testsprite2 || :
 timeout 6 ./testgles2 || :
 timeout 6 ./testgl2 || :
 timeout 6 ./testshader || :
-timeout 6 ./testvulkan || :
-timeout 6 ./testnative || :
+#timeout 6 ./testvulkan || :
+#timeout 6 ./testnative || :
 ./testmultiaudio || :
-glxinfo || :
+#glxinfo || :
 popd

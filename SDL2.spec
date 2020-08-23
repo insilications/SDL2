@@ -14,6 +14,8 @@ Source1  : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz.sig
 Summary  : Simple DirectMedia Layer
 Group    : Development/Tools
 License  : GPL-3.0 Zlib
+Requires: SDL2-bin = %{version}-%{release}
+Requires: SDL2-lib = %{version}-%{release}
 BuildRequires : Vulkan-Headers-dev
 BuildRequires : Vulkan-Loader-dev
 BuildRequires : alsa-lib-dev
@@ -239,6 +241,71 @@ This is the Simple DirectMedia Layer, a generic API that provides low
 level access to audio, keyboard, mouse, and display framebuffer across
 multiple platforms.
 
+%package bin
+Summary: bin components for the SDL2 package.
+Group: Binaries
+
+%description bin
+bin components for the SDL2 package.
+
+
+%package dev
+Summary: dev components for the SDL2 package.
+Group: Development
+Requires: SDL2-lib = %{version}-%{release}
+Requires: SDL2-bin = %{version}-%{release}
+Provides: SDL2-devel = %{version}-%{release}
+Requires: SDL2 = %{version}-%{release}
+
+%description dev
+dev components for the SDL2 package.
+
+
+%package dev32
+Summary: dev32 components for the SDL2 package.
+Group: Default
+Requires: SDL2-lib32 = %{version}-%{release}
+Requires: SDL2-bin = %{version}-%{release}
+Requires: SDL2-dev = %{version}-%{release}
+
+%description dev32
+dev32 components for the SDL2 package.
+
+
+%package lib
+Summary: lib components for the SDL2 package.
+Group: Libraries
+
+%description lib
+lib components for the SDL2 package.
+
+
+%package lib32
+Summary: lib32 components for the SDL2 package.
+Group: Default
+
+%description lib32
+lib32 components for the SDL2 package.
+
+
+%package staticdev
+Summary: staticdev components for the SDL2 package.
+Group: Default
+Requires: SDL2-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the SDL2 package.
+
+
+%package staticdev32
+Summary: staticdev32 components for the SDL2 package.
+Group: Default
+Requires: SDL2-dev = %{version}-%{release}
+
+%description staticdev32
+staticdev32 components for the SDL2 package.
+
+
 %prep
 %setup -q -n SDL2-2.0.12
 cd %{_builddir}/SDL2-2.0.12
@@ -248,18 +315,18 @@ unset http_proxy
 unset https_proxy
 unset no_proxy
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598184195
+export SOURCE_DATE_EPOCH=1598192813
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
 export PGO_GEN="-fprofile-generate=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-arcs -ftest-coverage --coverage -fprofile-partial-training"
-export CFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition -DHAVE_OPENGL $PGO_GEN"
-export FCFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition $PGO_GEN"
-export FFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition $PGO_GEN"
-export CXXFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition $PGO_GEN"
-export LDFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -fno-semantic-interposition $PGO_GEN"
+export CFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL $PGO_GEN"
+export FCFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
+export FFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
+export CXXFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL $PGO_GEN"
+export LDFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid $PGO_GEN"
 ## pgo use
 ## -ffat-lto-objects -fno-PIE -fno-PIE -m64 -no-pie -fpic -fvisibility=hidden -flto-partition=none  -fno-semantic-interposition -fno-plt
 ## gcc: -feliminate-unused-debug-types -fipa-pta -flto=16 -Wno-error -Wp,-D_REENTRANT -fno-common
@@ -323,10 +390,10 @@ timeout 6 ./testsprite2 || :
 timeout 6 ./testgles2 || :
 timeout 6 ./testgl2 || :
 timeout 6 ./testshader || :
-timeout 6 ./testvulkan || :
-timeout 6 ./testnative || :
+#timeout 6 ./testvulkan || :
+#timeout 6 ./testnative || :
 ./testmultiaudio || :
-glxinfo || :
+#glxinfo || :
 popd
 find . -type f -not -name '*.gcno' -delete -print
 export CFLAGS="${CFLAGS_USE}"
@@ -351,14 +418,30 @@ export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
 export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%cmake -DLIB_INSTALL_DIR:PATH=/usr/lib32 -DCMAKE_INSTALL_LIBDIR=/usr/lib32 -DLIB_SUFFIX=32 ..   -DSDL_SHARED=ON -DSDL_STATIC=OFF -DALSA_SHARED=ON -DPULSEAUDIO=ON -DBUILD_TOOLS=ON -DSDL_TEST=ON -DRPATH=OFF -DPULSEAUDIO_SHARED=ON -DVIDEO_OPENGL=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
+%cmake -DLIB_INSTALL_DIR:PATH=/usr/lib32 -DCMAKE_INSTALL_LIBDIR=/usr/lib32 -DLIB_SUFFIX=32 ..   -DSDL_SHARED=ON -DSDL_STATIC=ON -DALSA_SHARED=ON -DPULSEAUDIO=ON -DBUILD_TOOLS=OFF -DSDL_TEST=OFF -DRPATH=OFF -DPULSEAUDIO_SHARED=ON -DVIDEO_OPENGL=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
 make  %{?_smp_mflags}
 unset PKG_CONFIG_PATH
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1598184195
+export SOURCE_DATE_EPOCH=1598192813
 rm -rf %{buildroot}
+## install_prepend content
+pushd clr-build
+if [ -f "sdl2.pc" ]; then
+cp sdl2.pc test/sdl2.pc
+fi
+if [ -f "sdl2-config" ]; then
+cp sdl2-config test/sdl2-config
+fi
+if [ -f "../sdl2.m4" ]; then
+cp ../sdl2.m4 test/sdl2.m4
+fi
+if [ -f "../sdl2.m4" ]; then
+cp ../sdl2.m4 ../test/sdl2.m4
+fi
+popd
+## install_prepend end
 pushd clr-build32
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -374,3 +457,134 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/sdl2-config
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/SDL2/SDL.h
+/usr/include/SDL2/SDL_assert.h
+/usr/include/SDL2/SDL_atomic.h
+/usr/include/SDL2/SDL_audio.h
+/usr/include/SDL2/SDL_bits.h
+/usr/include/SDL2/SDL_blendmode.h
+/usr/include/SDL2/SDL_clipboard.h
+/usr/include/SDL2/SDL_config.h
+/usr/include/SDL2/SDL_config_android.h
+/usr/include/SDL2/SDL_config_iphoneos.h
+/usr/include/SDL2/SDL_config_macosx.h
+/usr/include/SDL2/SDL_config_minimal.h
+/usr/include/SDL2/SDL_config_os2.h
+/usr/include/SDL2/SDL_config_pandora.h
+/usr/include/SDL2/SDL_config_psp.h
+/usr/include/SDL2/SDL_config_windows.h
+/usr/include/SDL2/SDL_config_winrt.h
+/usr/include/SDL2/SDL_config_wiz.h
+/usr/include/SDL2/SDL_copying.h
+/usr/include/SDL2/SDL_cpuinfo.h
+/usr/include/SDL2/SDL_egl.h
+/usr/include/SDL2/SDL_endian.h
+/usr/include/SDL2/SDL_error.h
+/usr/include/SDL2/SDL_events.h
+/usr/include/SDL2/SDL_filesystem.h
+/usr/include/SDL2/SDL_gamecontroller.h
+/usr/include/SDL2/SDL_gesture.h
+/usr/include/SDL2/SDL_haptic.h
+/usr/include/SDL2/SDL_hints.h
+/usr/include/SDL2/SDL_joystick.h
+/usr/include/SDL2/SDL_keyboard.h
+/usr/include/SDL2/SDL_keycode.h
+/usr/include/SDL2/SDL_loadso.h
+/usr/include/SDL2/SDL_log.h
+/usr/include/SDL2/SDL_main.h
+/usr/include/SDL2/SDL_messagebox.h
+/usr/include/SDL2/SDL_metal.h
+/usr/include/SDL2/SDL_mouse.h
+/usr/include/SDL2/SDL_mutex.h
+/usr/include/SDL2/SDL_name.h
+/usr/include/SDL2/SDL_opengl.h
+/usr/include/SDL2/SDL_opengl_glext.h
+/usr/include/SDL2/SDL_opengles.h
+/usr/include/SDL2/SDL_opengles2.h
+/usr/include/SDL2/SDL_opengles2_gl2.h
+/usr/include/SDL2/SDL_opengles2_gl2ext.h
+/usr/include/SDL2/SDL_opengles2_gl2platform.h
+/usr/include/SDL2/SDL_opengles2_khrplatform.h
+/usr/include/SDL2/SDL_pixels.h
+/usr/include/SDL2/SDL_platform.h
+/usr/include/SDL2/SDL_power.h
+/usr/include/SDL2/SDL_quit.h
+/usr/include/SDL2/SDL_rect.h
+/usr/include/SDL2/SDL_render.h
+/usr/include/SDL2/SDL_revision.h
+/usr/include/SDL2/SDL_rwops.h
+/usr/include/SDL2/SDL_scancode.h
+/usr/include/SDL2/SDL_sensor.h
+/usr/include/SDL2/SDL_shape.h
+/usr/include/SDL2/SDL_stdinc.h
+/usr/include/SDL2/SDL_surface.h
+/usr/include/SDL2/SDL_system.h
+/usr/include/SDL2/SDL_syswm.h
+/usr/include/SDL2/SDL_test.h
+/usr/include/SDL2/SDL_test_assert.h
+/usr/include/SDL2/SDL_test_common.h
+/usr/include/SDL2/SDL_test_compare.h
+/usr/include/SDL2/SDL_test_crc32.h
+/usr/include/SDL2/SDL_test_font.h
+/usr/include/SDL2/SDL_test_fuzzer.h
+/usr/include/SDL2/SDL_test_harness.h
+/usr/include/SDL2/SDL_test_images.h
+/usr/include/SDL2/SDL_test_log.h
+/usr/include/SDL2/SDL_test_md5.h
+/usr/include/SDL2/SDL_test_memory.h
+/usr/include/SDL2/SDL_test_random.h
+/usr/include/SDL2/SDL_thread.h
+/usr/include/SDL2/SDL_timer.h
+/usr/include/SDL2/SDL_touch.h
+/usr/include/SDL2/SDL_types.h
+/usr/include/SDL2/SDL_version.h
+/usr/include/SDL2/SDL_video.h
+/usr/include/SDL2/SDL_vulkan.h
+/usr/include/SDL2/begin_code.h
+/usr/include/SDL2/close_code.h
+/usr/lib64/cmake/SDL2/SDL2Config.cmake
+/usr/lib64/cmake/SDL2/SDL2ConfigVersion.cmake
+/usr/lib64/cmake/SDL2/SDL2Targets-release.cmake
+/usr/lib64/cmake/SDL2/SDL2Targets.cmake
+/usr/lib64/libSDL2-2.0.so
+/usr/lib64/libSDL2.so
+/usr/lib64/pkgconfig/sdl2.pc
+/usr/share/aclocal/*.m4
+
+%files dev32
+%defattr(-,root,root,-)
+/usr/lib32/cmake/SDL2/SDL2Config.cmake
+/usr/lib32/cmake/SDL2/SDL2ConfigVersion.cmake
+/usr/lib32/cmake/SDL2/SDL2Targets-release.cmake
+/usr/lib32/cmake/SDL2/SDL2Targets.cmake
+/usr/lib32/libSDL2-2.0.so
+/usr/lib32/libSDL2.so
+/usr/lib32/pkgconfig/32sdl2.pc
+/usr/lib32/pkgconfig/sdl2.pc
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libSDL2-2.0.so.0
+/usr/lib64/libSDL2-2.0.so.0.12.0
+
+%files lib32
+%defattr(-,root,root,-)
+/usr/lib32/libSDL2-2.0.so.0
+/usr/lib32/libSDL2-2.0.so.0.12.0
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/libSDL2.a
+/usr/lib64/libSDL2main.a
+
+%files staticdev32
+%defattr(-,root,root,-)
+/usr/lib32/libSDL2.a
+/usr/lib32/libSDL2main.a
