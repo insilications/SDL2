@@ -55,9 +55,6 @@ Configure miss: pthread_set_name_np
 Configure miss: Vivante VDK API
 Configure miss: Vivante FB API
 Configure miss: X
-Configure miss: OpenGL support
-Configure miss: OpenGL ES support
-Configure miss: OpenGL ES2 support
 Configure miss: TTF_Init in -lSDL2_ttf
 Configure miss: windres
 Configure miss: linker option --dynamicbase

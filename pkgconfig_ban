@@ -3,20 +3,19 @@
 # 32gl
 # gl
 # 32alsa
+# alsa
 32bcm_host
 32brcmegl
 32directfb
 32esound
 32fcitx
-32ibus-1.0
-ibus-1.0
 32fox17
 32fusionsound
+32ibus-1.0
 32jack
 32libusb
 32mirclient
 32mircommon
-# alsa
 bcm_host
 brcmegl
 directfb
@@ -24,6 +23,7 @@ esound
 fcitx
 fox17
 fusionsound
+ibus-1.0
 jack
 libusb
 mirclient

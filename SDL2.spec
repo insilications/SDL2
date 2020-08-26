@@ -7,7 +7,7 @@
 %define keepstatic 1
 Name     : SDL2
 Version  : 2.0.12
-Release  : 41
+Release  : 42
 URL      : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
 Source0  : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
 Source1  : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz.sig
@@ -320,7 +320,7 @@ unset http_proxy
 unset https_proxy
 unset no_proxy
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598428019
+export SOURCE_DATE_EPOCH=1598429427
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -389,9 +389,12 @@ export LIBGL_ALWAYS_INDIRECT=1
 export __GL_ALLOW_UNOFFICIAL_PROTOCOL=1
 export __GL_SYNC_TO_VBLANK=0
 export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
-export PKG_CONFIG_PATH="../:/usr/lib64/pkgconfig"
+export PKG_CONFIG_PATH="/usr/lib64/pkgconfig:../"
+export LDFLAGS="${LDFLAGS} -L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lsystemd -lX11 -lpthread -lxcb -lXau -lXdmcp ../build/.libs/libSDL2_test.a ../build/.libs/libSDL2.a ../build/.libs/libSDL2main.a ../build/.libs/libSDL2.a /usr/lib64/libunwind.a /usr/lib64/libunwind-generic.a /usr/lib64/liblzma.a -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lsystemd -lX11 -lpthread -lxcb -lXau -lXdmcp"
+export LIBS="-L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lsystemd -lX11 -lpthread -lxcb -lXau -lXdmcp ../build/.libs/libSDL2_test.a ../build/.libs/libSDL2.a ../build/.libs/libSDL2main.a ../build/.libs/libSDL2.a /usr/lib64/libunwind.a /usr/lib64/libunwind-generic.a /usr/lib64/liblzma.a -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lsystemd -lX11 -lpthread -lxcb -lXau -lXdmcp"
+export CFLAGS="${CFLAGS} -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I../include"
 ./configure
-make -j16 V=1 VERBOSE=1 LIBS="-L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lX11 ../build/.libs/libSDL2_test.a ../build/.libs/libSDL2.a ../build/.libs/libSDL2main.a ../build/.libs/libSDL2.a /usr/lib64/libunwind.a /usr/lib64/libunwind-generic.a /usr/lib64/liblzma.a -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lX11" CFLAGS="${CFLAGS} -I../include"
+make -j16 V=1 VERBOSE=1 LIBS="-L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lsystemd -lX11 -lpthread -lxcb -lXau -lXdmcp ../build/.libs/libSDL2_test.a ../build/.libs/libSDL2.a ../build/.libs/libSDL2main.a ../build/.libs/libSDL2.a /usr/lib64/libunwind.a /usr/lib64/libunwind-generic.a /usr/lib64/liblzma.a -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lsystemd -lX11 -lpthread -lxcb -lXau -lXdmcp" CFLAGS="${CFLAGS} -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I../include"
 ./testautomation || :
 timeout 6 ./testdraw2 || :
 timeout 6 ./testsprite2 || :
@@ -403,6 +406,9 @@ timeout 6 ./testnative || :
 ./testmultiaudio || :
 glxinfo || :
 unset PKG_CONFIG_PATH
+unset LDFLAGS
+unset LIBS
+unset CFLAGS
 popd
 make clean
 export CFLAGS="${CFLAGS_USE}"
@@ -431,7 +437,7 @@ make  %{?_smp_mflags}  V=1 VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1598428019
+export SOURCE_DATE_EPOCH=1598429427
 rm -rf %{buildroot}
 ## install_prepend content
 #pushd clr-build
