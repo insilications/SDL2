@@ -1,0 +1,1 @@
+LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive"

@@ -7,7 +7,7 @@
 %define keepstatic 1
 Name     : SDL2
 Version  : 2.0.12
-Release  : 40
+Release  : 41
 URL      : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
 Source0  : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
 Source1  : https://www.libsdl.org/release/SDL2-2.0.12.tar.gz.sig
@@ -22,8 +22,10 @@ BuildRequires : alsa-lib-dev
 BuildRequires : alsa-lib-lib
 BuildRequires : alsa-tools
 BuildRequires : buildreq-cmake
+BuildRequires : buildreq-configure
 BuildRequires : buildreq-qmake
 BuildRequires : cairo-lib
+BuildRequires : ccache
 BuildRequires : cuda
 BuildRequires : cuda-dev
 BuildRequires : cuda-staticdev
@@ -83,6 +85,8 @@ BuildRequires : libsamplerate-staticdev32
 BuildRequires : libunwind
 BuildRequires : libunwind-dev
 BuildRequires : libunwind-dev32
+BuildRequires : libunwind-staticdev
+BuildRequires : libunwind-staticdev32
 BuildRequires : libusb
 BuildRequires : libusb-dev
 BuildRequires : libusb-dev32
@@ -127,11 +131,7 @@ BuildRequires : pkgconfig(32libudev)
 BuildRequires : pkgconfig(32libusb-1.0)
 BuildRequires : pkgconfig(32osmesa)
 BuildRequires : pkgconfig(32samplerate)
-BuildRequires : pkgconfig(32wayland-client)
-BuildRequires : pkgconfig(32wayland-cursor)
-BuildRequires : pkgconfig(32wayland-egl)
 BuildRequires : pkgconfig(32wayland-protocols)
-BuildRequires : pkgconfig(32wayland-scanner)
 BuildRequires : pkgconfig(32x11)
 BuildRequires : pkgconfig(32xatracker)
 BuildRequires : pkgconfig(32xcursor)
@@ -153,15 +153,17 @@ BuildRequires : pkgconfig(glesv2)
 BuildRequires : pkgconfig(libdrm)
 BuildRequires : pkgconfig(libpulse-simple)
 BuildRequires : pkgconfig(libudev)
+BuildRequires : pkgconfig(libunwind)
+BuildRequires : pkgconfig(libunwind-coredump)
+BuildRequires : pkgconfig(libunwind-generic)
+BuildRequires : pkgconfig(libunwind-ptrace)
+BuildRequires : pkgconfig(libunwind-setjmp)
 BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(osmesa)
 BuildRequires : pkgconfig(samplerate)
+BuildRequires : pkgconfig(sdl)
 BuildRequires : pkgconfig(vulkan)
-BuildRequires : pkgconfig(wayland-client)
-BuildRequires : pkgconfig(wayland-cursor)
-BuildRequires : pkgconfig(wayland-egl)
 BuildRequires : pkgconfig(wayland-protocols)
-BuildRequires : pkgconfig(wayland-scanner)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xatracker)
 BuildRequires : pkgconfig(xcursor)
@@ -309,43 +311,46 @@ staticdev32 components for the SDL2 package.
 %prep
 %setup -q -n SDL2-2.0.12
 cd %{_builddir}/SDL2-2.0.12
+pushd ..
+cp -a SDL2-2.0.12 build32
+popd
 
 %build
 unset http_proxy
 unset https_proxy
 unset no_proxy
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598192813
-mkdir -p clr-build
-pushd clr-build
+export SOURCE_DATE_EPOCH=1598428019
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
 export PGO_GEN="-fprofile-generate=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-arcs -ftest-coverage --coverage -fprofile-partial-training"
-export CFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL $PGO_GEN"
-export FCFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
-export FFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects $PGO_GEN"
-export CXXFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL $PGO_GEN"
-export LDFLAGS_GENERATE="-O3 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid $PGO_GEN"
+export CFLAGS_GENERATE="-O2 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -DHAVE_OPENGL $PGO_GEN"
+export FCFLAGS_GENERATE="-O2 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects $PGO_GEN"
+export FFLAGS_GENERATE="-O2 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects $PGO_GEN"
+export CXXFLAGS_GENERATE="-O2 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -DHAVE_OPENGL $PGO_GEN"
+export LDFLAGS_GENERATE="-O2 -march=native -mtune=native -falign-functions=32 -flimit-function-alignment -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid $PGO_GEN"
 ## pgo use
 ## -ffat-lto-objects -fno-PIE -fno-PIE -m64 -no-pie -fpic -fvisibility=hidden -flto-partition=none  -fno-semantic-interposition -fno-plt
 ## gcc: -feliminate-unused-debug-types -fipa-pta -flto=16 -Wno-error -Wp,-D_REENTRANT -fno-common
 export PGO_USE="-fprofile-use=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-correction -fprofile-partial-training"
-export CFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition -fno-plt $PGO_USE"
-export FCFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition -fno-plt $PGO_USE"
-export FFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fno-semantic-interposition -fno-plt $PGO_USE"
-export CXXFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition -fno-plt $PGO_USE"
-export LDFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -fno-semantic-interposition -fno-plt $PGO_USE"
+export CFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition -fno-plt $PGO_USE"
+export FCFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -fno-semantic-interposition -fno-plt $PGO_USE"
+export FFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -fno-semantic-interposition -fno-plt $PGO_USE"
+export CXXFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -DHAVE_OPENGL -fno-semantic-interposition -fno-plt $PGO_USE"
+export LDFLAGS_USE="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fPIC -ffat-lto-objects -fPIC -ffat-lto-objects -DHAVE_OPENGL -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -fno-semantic-interposition -fno-plt $PGO_USE"
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-#export CCACHE_DISABLE=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
-export PATH="/usr/cuda/bin:/usr/nvidia/bin:$PATH"
-#export CCACHE_DISABLE=1
+export PATH="/usr/cuda/bin:/usr/nvidia/bin:/usr/lib64/ccache/bin:$PATH"
+export CCACHE_NOHASHDIR=1
+export CCACHE_DIRECT=1
+export CCACHE_SLOPPINESS=pch_defines,locale,time_macros
+# export CCACHE_DISABLE=1
 export DISPLAY=:0
 export XDG_CONFIG_DIRS=/usr/share/xdg:/etc/xdg
 export XDG_SEAT=seat0
@@ -367,8 +372,8 @@ export CXXFLAGS="${CXXFLAGS_GENERATE}"
 export FFLAGS="${FFLAGS_GENERATE}"
 export FCFLAGS="${FCFLAGS_GENERATE}"
 export LDFLAGS="${LDFLAGS_GENERATE}"
-%cmake ..   -DSDL_SHARED=ON -DSDL_STATIC=ON -DALSA_SHARED=ON -DPULSEAUDIO=ON -DPULSEAUDIO_SHARED=ON -DLIBSAMPLERATE=ON -DVIDEO_OPENGL=ON -DVIDEO_OPENGLES=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DBUILD_TOOLS=ON -DSDL_TEST=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DVIDEO_VULKAN=ON -DSDL_VIDEO_VULKAN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
-make  %{?_smp_mflags}
+ %configure  --enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio --enable-pulseaudio-shared --enable-alsa --enable-alsa-shared --enable-libsamplerate --enable-video-opengl --enable-video-opengles2 --enable-video-vulkan --enable-video-x11 --enable-x11-shared --enable-video-wayland --enable-wayland-shared --enable-assembly --enable-video-vulkan --enable-ssemath --disable-rpath --enable-sdl2-config
+make  %{?_smp_mflags}  V=1 VERBOSE=1 LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive"
 
 pushd test
 export DISPLAY=:0
@@ -384,31 +389,34 @@ export LIBGL_ALWAYS_INDIRECT=1
 export __GL_ALLOW_UNOFFICIAL_PROTOCOL=1
 export __GL_SYNC_TO_VBLANK=0
 export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
+export PKG_CONFIG_PATH="../:/usr/lib64/pkgconfig"
+./configure
+make -j16 V=1 VERBOSE=1 LIBS="-L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lX11 ../build/.libs/libSDL2_test.a ../build/.libs/libSDL2.a ../build/.libs/libSDL2main.a ../build/.libs/libSDL2.a /usr/lib64/libunwind.a /usr/lib64/libunwind-generic.a /usr/lib64/liblzma.a -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lX11" CFLAGS="${CFLAGS} -I../include"
 ./testautomation || :
 timeout 6 ./testdraw2 || :
 timeout 6 ./testsprite2 || :
 timeout 6 ./testgles2 || :
 timeout 6 ./testgl2 || :
 timeout 6 ./testshader || :
-#timeout 6 ./testvulkan || :
-#timeout 6 ./testnative || :
+timeout 6 ./testvulkan || :
+timeout 6 ./testnative || :
 ./testmultiaudio || :
-#glxinfo || :
+glxinfo || :
+unset PKG_CONFIG_PATH
 popd
-find . -type f -not -name '*.gcno' -delete -print
+make clean
 export CFLAGS="${CFLAGS_USE}"
 export CXXFLAGS="${CXXFLAGS_USE}"
 export FFLAGS="${FFLAGS_USE}"
 export FCFLAGS="${FCFLAGS_USE}"
 export LDFLAGS="${LDFLAGS_USE}"
-%cmake ..   -DSDL_SHARED=ON -DSDL_STATIC=ON -DALSA_SHARED=ON -DPULSEAUDIO=ON -DPULSEAUDIO_SHARED=ON -DLIBSAMPLERATE=ON -DVIDEO_OPENGL=ON -DVIDEO_OPENGLES=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DBUILD_TOOLS=ON -DSDL_TEST=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DVIDEO_VULKAN=ON -DSDL_VIDEO_VULKAN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
-make  %{?_smp_mflags}
-popd
-mkdir -p clr-build32
-pushd clr-build32
-export CFLAGS="-g -O3 -fuse-linker-plugin -pipe"
-export CXXFLAGS="-g -O3 -fuse-linker-plugin -fvisibility-inlines-hidden -pipe"
-export LDFLAGS="-g -O3 -fuse-linker-plugin -pipe"
+%configure  --enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio --enable-pulseaudio-shared --enable-alsa --enable-alsa-shared --enable-libsamplerate --enable-video-opengl --enable-video-opengles2 --enable-video-vulkan --enable-video-x11 --enable-x11-shared --enable-video-wayland --enable-wayland-shared --enable-assembly --enable-video-vulkan --enable-ssemath --disable-rpath --enable-sdl2-config
+make  %{?_smp_mflags}  V=1 VERBOSE=1 LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive"
+
+pushd ../build32/
+export CFLAGS="-g -O2 -fuse-linker-plugin -pipe"
+export CXXFLAGS="-g -O2 -fuse-linker-plugin -fvisibility-inlines-hidden -pipe"
+export LDFLAGS="-g -O2 -fuse-linker-plugin -pipe"
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -418,31 +426,30 @@ export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
 export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%cmake -DLIB_INSTALL_DIR:PATH=/usr/lib32 -DCMAKE_INSTALL_LIBDIR=/usr/lib32 -DLIB_SUFFIX=32 ..   -DSDL_SHARED=ON -DSDL_STATIC=ON -DALSA_SHARED=ON -DPULSEAUDIO=ON -DBUILD_TOOLS=OFF -DSDL_TEST=OFF -DRPATH=OFF -DPULSEAUDIO_SHARED=ON -DVIDEO_OPENGL=ON -DVIDEO_X11=ON -DX11_SHARED=ON -DRPATH=OFF -DSDL_DLOPEN=ON -DASSEMBLY=ON -DSSEMATH=ON -DVIDEO_WAYLAND=ON -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=ON -DCMAKE_BUILD_TYPE=Release
-make  %{?_smp_mflags}
-unset PKG_CONFIG_PATH
+%configure  --enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio --enable-pulseaudio-shared --enable-alsa --enable-alsa-shared --enable-video-opengl --enable-video-x11 --enable-x11-shared --enable-video-wayland --enable-wayland-shared --enable-assembly --enable-ssemath --disable-rpath --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+make  %{?_smp_mflags}  V=1 VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1598192813
+export SOURCE_DATE_EPOCH=1598428019
 rm -rf %{buildroot}
 ## install_prepend content
-pushd clr-build
-if [ -f "sdl2.pc" ]; then
-cp sdl2.pc test/sdl2.pc
-fi
-if [ -f "sdl2-config" ]; then
-cp sdl2-config test/sdl2-config
-fi
-if [ -f "../sdl2.m4" ]; then
-cp ../sdl2.m4 test/sdl2.m4
-fi
-if [ -f "../sdl2.m4" ]; then
-cp ../sdl2.m4 ../test/sdl2.m4
-fi
-popd
+#pushd clr-build
+#if [ -f "sdl2.pc" ]; then
+#    cp sdl2.pc test/sdl2.pc
+#fi
+#if [ -f "sdl2-config" ]; then
+#    cp sdl2-config test/sdl2-config
+#fi
+#if [ -f "../sdl2.m4" ]; then
+#    cp ../sdl2.m4 test/sdl2.m4
+#fi
+#if [ -f "../sdl2.m4" ]; then
+#    cp ../sdl2.m4 ../test/sdl2.m4
+#fi
+#popd
 ## install_prepend end
-pushd clr-build32
+pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
 then
@@ -451,9 +458,7 @@ for i in *.pc ; do ln -s $i 32$i ; done
 popd
 fi
 popd
-pushd clr-build
 %make_install
-popd
 
 %files
 %defattr(-,root,root,-)
@@ -472,17 +477,6 @@ popd
 /usr/include/SDL2/SDL_blendmode.h
 /usr/include/SDL2/SDL_clipboard.h
 /usr/include/SDL2/SDL_config.h
-/usr/include/SDL2/SDL_config_android.h
-/usr/include/SDL2/SDL_config_iphoneos.h
-/usr/include/SDL2/SDL_config_macosx.h
-/usr/include/SDL2/SDL_config_minimal.h
-/usr/include/SDL2/SDL_config_os2.h
-/usr/include/SDL2/SDL_config_pandora.h
-/usr/include/SDL2/SDL_config_psp.h
-/usr/include/SDL2/SDL_config_windows.h
-/usr/include/SDL2/SDL_config_winrt.h
-/usr/include/SDL2/SDL_config_wiz.h
-/usr/include/SDL2/SDL_copying.h
 /usr/include/SDL2/SDL_cpuinfo.h
 /usr/include/SDL2/SDL_egl.h
 /usr/include/SDL2/SDL_endian.h
@@ -549,22 +543,16 @@ popd
 /usr/include/SDL2/SDL_vulkan.h
 /usr/include/SDL2/begin_code.h
 /usr/include/SDL2/close_code.h
-/usr/lib64/cmake/SDL2/SDL2Config.cmake
-/usr/lib64/cmake/SDL2/SDL2ConfigVersion.cmake
-/usr/lib64/cmake/SDL2/SDL2Targets-release.cmake
-/usr/lib64/cmake/SDL2/SDL2Targets.cmake
-/usr/lib64/libSDL2-2.0.so
+/usr/lib64/cmake/SDL2/sdl2-config-version.cmake
+/usr/lib64/cmake/SDL2/sdl2-config.cmake
 /usr/lib64/libSDL2.so
 /usr/lib64/pkgconfig/sdl2.pc
 /usr/share/aclocal/*.m4
 
 %files dev32
 %defattr(-,root,root,-)
-/usr/lib32/cmake/SDL2/SDL2Config.cmake
-/usr/lib32/cmake/SDL2/SDL2ConfigVersion.cmake
-/usr/lib32/cmake/SDL2/SDL2Targets-release.cmake
-/usr/lib32/cmake/SDL2/SDL2Targets.cmake
-/usr/lib32/libSDL2-2.0.so
+/usr/lib32/cmake/SDL2/sdl2-config-version.cmake
+/usr/lib32/cmake/SDL2/sdl2-config.cmake
 /usr/lib32/libSDL2.so
 /usr/lib32/pkgconfig/32sdl2.pc
 /usr/lib32/pkgconfig/sdl2.pc
@@ -582,9 +570,11 @@ popd
 %files staticdev
 %defattr(-,root,root,-)
 /usr/lib64/libSDL2.a
+/usr/lib64/libSDL2_test.a
 /usr/lib64/libSDL2main.a
 
 %files staticdev32
 %defattr(-,root,root,-)
 /usr/lib32/libSDL2.a
+/usr/lib32/libSDL2_test.a
 /usr/lib32/libSDL2main.a

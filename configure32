@@ -1,0 +1,1 @@
+--enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio --enable-pulseaudio-shared --enable-alsa --enable-alsa-shared --enable-video-opengl --enable-video-x11 --enable-x11-shared --enable-video-wayland --enable-wayland-shared --enable-assembly --enable-ssemath --disable-rpath

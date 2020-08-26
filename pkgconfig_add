@@ -1,8 +1,6 @@
 # This file contains additional pkgconfig build requirements that did
 # not get picked up automatically. One name per line, no whitespace.
 32alsa
-alsa-topology
-alsa
 32dbus-1
 32dri
 32egl
@@ -26,9 +24,9 @@ alsa
 32xkbcommon
 32xrandr
 32xscrnsaver
+alsa
+alsa-topology
 dbus-1
-libunwind-generic
-libunwind
 dri
 egl
 gbm
@@ -38,6 +36,11 @@ glesv2
 libdrm
 libpulse-simple
 libudev
+libunwind
+libunwind-coredump
+libunwind-generic
+libunwind-ptrace
+libunwind-setjmp
 libusb-1.0
 osmesa
 samplerate

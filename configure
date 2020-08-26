@@ -1,1 +1,0 @@
---enable-shared --enable-static --enable-sdl-dlopen --enable-pulseaudio-shared  --enable-alsa --enable-video-wayland --enable-assembly --enable-video-vulkan --disable-rpath

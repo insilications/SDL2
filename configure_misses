@@ -17,9 +17,6 @@ Configure miss: _stricmp
 Configure miss: _strnicmp
 Configure miss: sysctlbyname
 Configure miss: iconv_open in -liconv
-Configure miss: libunwind.h usability
-Configure miss: libunwind.h presence
-Configure miss: libunwind.h
 Configure miss: Altivec with GCC altivec.h and -maltivec option
 Configure miss: Altivec with GCC -maltivec option
 Configure miss: Altivec with GCC altivec.h and -faltivec option
@@ -44,7 +41,10 @@ Configure miss: sndio audio support
 Configure miss: RPI
 Configure miss: Raspberry Pi
 Configure miss: dbus/dbus.h presence
+Configure miss: IBUS
+Configure miss: ibus-1.0/ibus.h usability
 Configure miss: ibus-1.0/ibus.h presence
+Configure miss: ibus-1.0/ibus.h
 Configure miss: FCITX
 Configure miss: fcitx/frontend.h usability
 Configure miss: fcitx/frontend.h presence
@@ -54,6 +54,11 @@ Configure miss: pthread_np.h
 Configure miss: pthread_set_name_np
 Configure miss: Vivante VDK API
 Configure miss: Vivante FB API
+Configure miss: X
+Configure miss: OpenGL support
+Configure miss: OpenGL ES support
+Configure miss: OpenGL ES2 support
+Configure miss: TTF_Init in -lSDL2_ttf
 Configure miss: windres
 Configure miss: linker option --dynamicbase
 Configure miss: linker option --nxcompat
@@ -73,9 +78,6 @@ Configure miss: _stricmp
 Configure miss: _strnicmp
 Configure miss: sysctlbyname
 Configure miss: iconv_open in -liconv
-Configure miss: libunwind.h usability
-Configure miss: libunwind.h presence
-Configure miss: libunwind.h
 Configure miss: Altivec with GCC altivec.h and -maltivec option
 Configure miss: Altivec with GCC -maltivec option
 Configure miss: Altivec with GCC altivec.h and -faltivec option
@@ -100,7 +102,10 @@ Configure miss: sndio audio support
 Configure miss: RPI
 Configure miss: Raspberry Pi
 Configure miss: dbus/dbus.h presence
+Configure miss: IBUS
+Configure miss: ibus-1.0/ibus.h usability
 Configure miss: ibus-1.0/ibus.h presence
+Configure miss: ibus-1.0/ibus.h
 Configure miss: FCITX
 Configure miss: fcitx/frontend.h usability
 Configure miss: fcitx/frontend.h presence
@@ -130,9 +135,6 @@ Configure miss: _stricmp
 Configure miss: _strnicmp
 Configure miss: sysctlbyname
 Configure miss: iconv_open in -liconv
-Configure miss: libunwind.h usability
-Configure miss: libunwind.h presence
-Configure miss: libunwind.h
 Configure miss: Altivec with GCC altivec.h and -maltivec option
 Configure miss: Altivec with GCC -maltivec option
 Configure miss: Altivec with GCC altivec.h and -faltivec option
@@ -157,7 +159,10 @@ Configure miss: sndio audio support
 Configure miss: RPI
 Configure miss: Raspberry Pi
 Configure miss: dbus/dbus.h presence
+Configure miss: IBUS
+Configure miss: ibus-1.0/ibus.h usability
 Configure miss: ibus-1.0/ibus.h presence
+Configure miss: ibus-1.0/ibus.h
 Configure miss: FCITX
 Configure miss: fcitx/frontend.h usability
 Configure miss: fcitx/frontend.h presence

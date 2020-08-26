@@ -12,14 +12,18 @@ export LIBGL_ALWAYS_INDIRECT=1
 export __GL_ALLOW_UNOFFICIAL_PROTOCOL=1
 export __GL_SYNC_TO_VBLANK=0
 export LD_LIBRARY_PATH="/usr/cuda/lib64:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
+export PKG_CONFIG_PATH="../:/usr/lib64/pkgconfig"
+./configure
+make -j16 V=1 VERBOSE=1 LIBS="-L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lX11 -lpthread -lxcb -lXau -lXdmcp ../build/.libs/libSDL2_test.a ../build/.libs/libSDL2.a ../build/.libs/libSDL2main.a ../build/.libs/libSDL2.a /usr/lib64/libunwind.a /usr/lib64/libunwind-generic.a /usr/lib64/liblzma.a -L/usr/nvidia/lib -lGL -lEGL -lGLX -lnvcuvid -L/usr/lib64 -pthread -lmvec -lm -ldl -lpthread -lrt -ldbus-1 -lX11 -lpthread -lxcb -lXau -lXdmcp" CFLAGS="${CFLAGS} -I../include"
 ./testautomation || :
 timeout 6 ./testdraw2 || :
 timeout 6 ./testsprite2 || :
 timeout 6 ./testgles2 || :
 timeout 6 ./testgl2 || :
 timeout 6 ./testshader || :
-#timeout 6 ./testvulkan || :
-#timeout 6 ./testnative || :
+timeout 6 ./testvulkan || :
+timeout 6 ./testnative || :
 ./testmultiaudio || :
-#glxinfo || :
+glxinfo || :
+unset PKG_CONFIG_PATH
 popd

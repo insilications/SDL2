@@ -6,6 +6,7 @@ alsa-tools
 buildreq-cmake
 buildreq-qmake
 cairo-lib
+ccache
 cuda
 cuda-dev
 cuda-staticdev
@@ -47,6 +48,8 @@ libsamplerate-staticdev32
 libunwind
 libunwind-dev
 libunwind-dev32
+libunwind-staticdev
+libunwind-staticdev32
 libusb
 libusb-dev
 libusb-dev32
