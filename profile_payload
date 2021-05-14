@@ -42,7 +42,7 @@ timeout 6 ./loopwavequeue || :
 ./testfile || :
 ./testiconv || :
 ./testkeys || :
-./testoverlay2 || :
+timeout 6 ./testoverlay2 || :
 ./testplatform || :
 ./testsem || :
 ./testshape || :

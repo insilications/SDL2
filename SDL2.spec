@@ -446,7 +446,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620979385
+export SOURCE_DATE_EPOCH=1620980100
 unset LD_AS_NEEDED
 mkdir -p clr-build
 pushd clr-build
@@ -565,8 +565,8 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 -DMMX:BOOL=OFF \
 -DSDL_TEST:BOOL=ON
 ## make_prepend content
-sd "/usr/lib64/libsamplerate.a" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
-sd "\-lsamplerate" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
+sd "/usr/lib64/libsamplerate.a" -- "-Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive" $(fd -uu link.txt)
+sd "\-lsamplerate" -- "-Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive" $(fd -uu link.txt)
 ## make_prepend end
 make  %{?_smp_mflags}  V=1 VERBOSE=1 V=1 VERBOSE=1
 ## ccache stats
@@ -679,8 +679,8 @@ export LDFLAGS="${LDFLAGS_USE}"
 -DMMX:BOOL=OFF \
 -DSDL_TEST:BOOL=OFF
 ## make_prepend content
-sd "/usr/lib64/libsamplerate.a" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
-sd "\-lsamplerate" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
+sd "/usr/lib64/libsamplerate.a" -- "-Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive" $(fd -uu link.txt)
+sd "\-lsamplerate" -- "-Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive" $(fd -uu link.txt)
 ## make_prepend end
 make  %{?_smp_mflags}  V=1 VERBOSE=1 V=1 VERBOSE=1
 ## ccache stats
@@ -690,7 +690,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1620979385
+export SOURCE_DATE_EPOCH=1620980100
 rm -rf %{buildroot}
 pushd clr-build
 %make_install
