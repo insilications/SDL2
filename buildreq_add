@@ -3,9 +3,13 @@
 acl
 acl-dev
 acl-staticdev
+alsa-firmware
 alsa-lib-dev
 alsa-lib-lib
+alsa-plugins
+alsa-plugins-lib
 alsa-tools
+alsa-utils
 binutils
 binutils-dev
 binutils-staticdev
