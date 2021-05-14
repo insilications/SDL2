@@ -33,6 +33,7 @@ timeout 6 ./testgl2 || :
 timeout 6 ./testshader || :
 timeout 6 ./testvulkan || :
 timeout 6 ./testnative || :
+exit 1
 ./testmultiaudio || :
 ./checkkeys || :
 timeout 6 ./loopwave || :
