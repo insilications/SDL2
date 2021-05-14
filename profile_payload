@@ -35,8 +35,8 @@ timeout 6 ./testvulkan || :
 timeout 6 ./testnative || :
 ./testmultiaudio || :
 ./checkkeys || :
-./loopwave || :
-./loopwavequeue || :
+timeout 6 ./loopwave || :
+timeout 6 ./loopwavequeue || :
 ./testaudioinfo || :
 ./testerror || :
 ./testfile || :
