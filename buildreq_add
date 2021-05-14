@@ -18,6 +18,8 @@ freetype-lib
 gcc-dev32
 gcc-libgcc32
 gcc-libstdc++32
+jack2
+jack2-dev
 glib
 glib-bin
 glibc-dev32
@@ -34,6 +36,7 @@ harfbuzz-lib
 icu4c-lib
 libcap-ng-dev
 libdrm-lib
+libdrm-dev
 libffi
 libinput-data
 libinput-lib
