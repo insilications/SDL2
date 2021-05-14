@@ -467,7 +467,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620984322
+export SOURCE_DATE_EPOCH=1620984558
 unset LD_AS_NEEDED
 mkdir -p clr-build
 pushd clr-build
@@ -708,7 +708,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1620984322
+export SOURCE_DATE_EPOCH=1620984558
 rm -rf %{buildroot}
 pushd clr-build
 %make_install
