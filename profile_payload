@@ -42,9 +42,6 @@ timeout 6 ./loopwavequeue || :
 ./testfile || :
 ./testiconv || :
 ./testkeys || :
-./testloadso || :
-./testlocale || :
-./testlock || :
 ./testoverlay2 || :
 ./testplatform || :
 ./testsem || :
@@ -52,4 +49,5 @@ timeout 6 ./loopwavequeue || :
 ./testthread || :
 ./testtimer || :
 ./torturethread || :
+glxinfo ||:
 popd

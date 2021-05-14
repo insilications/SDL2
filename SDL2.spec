@@ -11,120 +11,313 @@ Source0  : https://www.libsdl.org/release/SDL2-2.0.14.tar.gz
 Summary  : Simple DirectMedia Layer
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 Zlib
+BuildRequires : ImageMagick-dev
+BuildRequires : Sphinx
 BuildRequires : Vulkan-Headers-dev
 BuildRequires : Vulkan-Loader-dev
+BuildRequires : Z3-dev
+BuildRequires : Z3-staticdev
+BuildRequires : acl
+BuildRequires : acl-dev
+BuildRequires : acl-staticdev
 BuildRequires : alsa-lib-dev
 BuildRequires : alsa-lib-lib
 BuildRequires : alsa-tools
+BuildRequires : binutils
+BuildRequires : binutils-dev
+BuildRequires : binutils-staticdev
+BuildRequires : brotli
+BuildRequires : brotli-dev
+BuildRequires : brotli-staticdev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-qmake
+BuildRequires : bzip2
+BuildRequires : bzip2-dev
+BuildRequires : bzip2-staticdev
+BuildRequires : ca-certs
+BuildRequires : ca-certs-static
+BuildRequires : cairo
+BuildRequires : cairo-dev
 BuildRequires : cairo-lib
 BuildRequires : ccache
+BuildRequires : clazy
+BuildRequires : cmake
+BuildRequires : cppcheck
 BuildRequires : cuda
 BuildRequires : cuda-dev
 BuildRequires : cuda-staticdev
+BuildRequires : curl-dev
+BuildRequires : dbus
+BuildRequires : dbus-broker
 BuildRequires : dbus-dev
+BuildRequires : dbus-glib
+BuildRequires : dbus-glib-dev
+BuildRequires : dbus-python
+BuildRequires : doxygen
+BuildRequires : e2fsprogs-dev
+BuildRequires : elfutils-dev
+BuildRequires : evtest
+BuildRequires : expat-dev
+BuildRequires : expat-dev32
+BuildRequires : expat-staticdev
 BuildRequires : findutils
 BuildRequires : fontconfig-data
+BuildRequires : fontconfig-dev
 BuildRequires : fontconfig-lib
+BuildRequires : freetype-dev
 BuildRequires : freetype-lib
+BuildRequires : fribidi-dev
+BuildRequires : gcc
+BuildRequires : gcc-dev
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
+BuildRequires : gcc-libs-math
 BuildRequires : gcc-libstdc++32
+BuildRequires : gcc-libubsan
+BuildRequires : gcc-locale
+BuildRequires : gdb
+BuildRequires : gdb-dev
+BuildRequires : gettext
 BuildRequires : glib
 BuildRequires : glib-bin
 BuildRequires : glib-data
 BuildRequires : glib-dev
 BuildRequires : glib-dev32
 BuildRequires : glib-lib
+BuildRequires : glibc
+BuildRequires : glibc-dev
 BuildRequires : glibc-dev32
+BuildRequires : glibc-lib-avx2
 BuildRequires : glibc-libc32
 BuildRequires : glibc-staticdev
+BuildRequires : gmp
+BuildRequires : gmp-dev
+BuildRequires : gmp-staticdev
+BuildRequires : gnutls
+BuildRequires : gnutls-dev
+BuildRequires : googletest
+BuildRequires : googletest-dev
+BuildRequires : graphite
+BuildRequires : graphite-dev
+BuildRequires : gsm-dev
 BuildRequires : gtk+-data
 BuildRequires : gtk+-lib
 BuildRequires : gtk3-lib
+BuildRequires : harfbuzz-dev
 BuildRequires : harfbuzz-lib
 BuildRequires : icu4c-lib
 BuildRequires : jack2
 BuildRequires : jack2-dev
+BuildRequires : jsoncpp
+BuildRequires : jsoncpp-dev
+BuildRequires : jsoncpp-lib
+BuildRequires : jsoncpp-staticdev
+BuildRequires : keyutils
+BuildRequires : keyutils-dev
+BuildRequires : krb5
+BuildRequires : krb5-dev
 BuildRequires : libX11-data
 BuildRequires : libX11-dev
 BuildRequires : libX11-lib
 BuildRequires : libXScrnSaver
 BuildRequires : libXScrnSaver-dev
 BuildRequires : libXScrnSaver-lib
+BuildRequires : libXau-dev
 BuildRequires : libXau-lib
+BuildRequires : libXcursor-dev
 BuildRequires : libXcursor-lib
+BuildRequires : libXdamage-dev
 BuildRequires : libXdamage-lib
+BuildRequires : libXdmcp-dev
 BuildRequires : libXdmcp-lib
+BuildRequires : libXext-dev
 BuildRequires : libXext-lib
+BuildRequires : libXfont2-dev
+BuildRequires : libXft-dev
 BuildRequires : libXft-lib
+BuildRequires : libXi-dev
 BuildRequires : libXi-lib
+BuildRequires : libXrender-dev
 BuildRequires : libXrender-lib
+BuildRequires : libXtst-dev
 BuildRequires : libXtst-lib
 BuildRequires : libXxf86vm-dev
 BuildRequires : libXxf86vm-dev32
 BuildRequires : libXxf86vm-lib
+BuildRequires : libarchive
+BuildRequires : libarchive-dev
+BuildRequires : libarchive-staticdev
+BuildRequires : libatomic_ops-dev
+BuildRequires : libatomic_ops-staticdev
+BuildRequires : libcap
+BuildRequires : libcap-dev
 BuildRequires : libcap-ng-dev
+BuildRequires : libconfig-dev
+BuildRequires : libdrm
 BuildRequires : libdrm-dev
 BuildRequires : libdrm-lib
+BuildRequires : libedit
+BuildRequires : libedit-dev
+BuildRequires : libepoxy
+BuildRequires : libepoxy-dev
 BuildRequires : libffi
+BuildRequires : libffi-dev
+BuildRequires : libffi-staticdev
+BuildRequires : libgcc1
+BuildRequires : libgcrypt
+BuildRequires : libgcrypt-dev
+BuildRequires : libgpg-error
+BuildRequires : libgpg-error-dev
+BuildRequires : libidn2
+BuildRequires : libidn2-dev
+BuildRequires : libidn2-staticdev
 BuildRequires : libinput-data
 BuildRequires : libinput-lib
 BuildRequires : libinput-libexec
+BuildRequires : libjpeg-turbo-dev
+BuildRequires : libogg
+BuildRequires : libogg-dev
 BuildRequires : libpciaccess
 BuildRequires : libpciaccess-dev
+BuildRequires : libplacebo
+BuildRequires : libplacebo-dev
+BuildRequires : libpng-dev
 BuildRequires : libpng-lib
 BuildRequires : libsamplerate-dev
 BuildRequires : libsamplerate-dev32
 BuildRequires : libsamplerate-staticdev
 BuildRequires : libsamplerate-staticdev32
+BuildRequires : libstdc++
+BuildRequires : libstdc++-dev
+BuildRequires : libtasn1-dev
+BuildRequires : libunistring-dev
+BuildRequires : libunistring-staticdev
 BuildRequires : libunwind
 BuildRequires : libunwind-dev
 BuildRequires : libunwind-dev32
 BuildRequires : libusb
 BuildRequires : libusb-dev
 BuildRequires : libusb-dev32
+BuildRequires : libva
+BuildRequires : libva-dev
+BuildRequires : libva-lib
+BuildRequires : libvdpau
+BuildRequires : libvdpau-dev
+BuildRequires : libvorbis
+BuildRequires : libvorbis-dev
+BuildRequires : libwebp-dev
+BuildRequires : libxcb-dev
 BuildRequires : libxcb-lib
 BuildRequires : libxml2-dev
 BuildRequires : libxml2-staticdev
+BuildRequires : libxslt-bin
 BuildRequires : libxvid-staticdev
 BuildRequires : libzimg-dev
 BuildRequires : libzimg-staticdev
+BuildRequires : llvm
+BuildRequires : llvm-abi
+BuildRequires : llvm-bin
+BuildRequires : llvm-data
+BuildRequires : llvm-dev
+BuildRequires : llvm-lib
+BuildRequires : llvm-libexec
+BuildRequires : llvm-man
+BuildRequires : llvm-staticdev
 BuildRequires : lz4
 BuildRequires : lz4-dev
 BuildRequires : lz4-staticdev
 BuildRequires : lzo
 BuildRequires : lzo-dev
 BuildRequires : lzo-staticdev
+BuildRequires : md4c
+BuildRequires : md4c-dev
+BuildRequires : md4c-staticdev
+BuildRequires : mediasdk-dev
 BuildRequires : mesa
 BuildRequires : mesa-demos
 BuildRequires : mesa-dev
 BuildRequires : mesa-lib
+BuildRequires : mm-common-dev
+BuildRequires : nasm
+BuildRequires : nasm-bin
+BuildRequires : ncurses-dev
+BuildRequires : nettle
+BuildRequires : nettle-dev
+BuildRequires : ninja
+BuildRequires : not-ffmpeg
+BuildRequires : not-ffmpeg-dev
+BuildRequires : numlockx
 BuildRequires : nvidia
 BuildRequires : nvidia-dev
 BuildRequires : nvidia-lib
+BuildRequires : opencl-headers
+BuildRequires : opencl-headers-dev
+BuildRequires : openjpeg-dev
+BuildRequires : openssl
+BuildRequires : openssl-dev
 BuildRequires : openssl-lib
+BuildRequires : openssl-staticdev
+BuildRequires : orc-dev
+BuildRequires : orc-staticdev
 BuildRequires : p11-kit
 BuildRequires : p11-kit-dev
+BuildRequires : pacrunner
+BuildRequires : pacrunner-dev
 BuildRequires : pango-lib
 BuildRequires : pcre-dev
 BuildRequires : pcre-staticdev
+BuildRequires : perl
+BuildRequires : perl(XML::Parser)
+BuildRequires : perl-Config-General
+BuildRequires : perl-Config-Tiny
+BuildRequires : perl-Crypt-SSLeay
+BuildRequires : perl-DBI
+BuildRequires : perl-DateTime-TimeZone
+BuildRequires : perl-Encode-Locale
+BuildRequires : perl-Error
+BuildRequires : perl-File-Listing
+BuildRequires : perl-HTML-Parser
+BuildRequires : perl-HTML-Tagset
+BuildRequires : perl-HTTP-Cookies
+BuildRequires : perl-HTTP-Date
+BuildRequires : perl-HTTP-Message
+BuildRequires : perl-HTTP-Negotiate
+BuildRequires : perl-IO-HTML
+BuildRequires : perl-LWP-MediaTypes
+BuildRequires : perl-LWP-Protocol-https
+BuildRequires : perl-Params-Validate
+BuildRequires : perl-Test-Simple
+BuildRequires : perl-Try-Tiny
+BuildRequires : perl-URI
+BuildRequires : perl-XML-NamespaceSupport
+BuildRequires : perl-XML-Parser
+BuildRequires : perl-libwww-perl
+BuildRequires : perl-man
+BuildRequires : pixman
 BuildRequires : pixman-dev
 BuildRequires : pixman-lib
 BuildRequires : pixman-staticdev
 BuildRequires : pkg-config
+BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(alsa-topology)
 BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(dri)
 BuildRequires : pkgconfig(egl)
+BuildRequires : pkgconfig(expat)
 BuildRequires : pkgconfig(gbm)
 BuildRequires : pkgconfig(gl)
 BuildRequires : pkgconfig(glesv1_cm)
 BuildRequires : pkgconfig(glesv2)
+BuildRequires : pkgconfig(glib-2.0)
+BuildRequires : pkgconfig(gmock)
+BuildRequires : pkgconfig(gmock_main)
+BuildRequires : pkgconfig(gtest)
+BuildRequires : pkgconfig(gtest_main)
+BuildRequires : pkgconfig(ice)
 BuildRequires : pkgconfig(libdrm)
 BuildRequires : pkgconfig(libpulse-simple)
+BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(libudev)
 BuildRequires : pkgconfig(libunwind)
 BuildRequires : pkgconfig(libunwind-coredump)
@@ -134,6 +327,9 @@ BuildRequires : pkgconfig(libunwind-setjmp)
 BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(osmesa)
 BuildRequires : pkgconfig(samplerate)
+BuildRequires : pkgconfig(sm)
+BuildRequires : pkgconfig(systemd)
+BuildRequires : pkgconfig(valgrind)
 BuildRequires : pkgconfig(vulkan)
 BuildRequires : pkgconfig(wayland-client)
 BuildRequires : pkgconfig(wayland-cursor)
@@ -149,20 +345,38 @@ BuildRequires : pkgconfig(xinerama)
 BuildRequires : pkgconfig(xkbcommon)
 BuildRequires : pkgconfig(xrandr)
 BuildRequires : pkgconfig(xscrnsaver)
+BuildRequires : pkgconfig(zlib)
 BuildRequires : pulseaudio
 BuildRequires : pulseaudio-dev
+BuildRequires : python3-core
+BuildRequires : python3-dev
+BuildRequires : python3-staticdev
+BuildRequires : setxkbmap
+BuildRequires : shared-mime-info
+BuildRequires : snappy-dev
+BuildRequires : sqlite-autoconf
+BuildRequires : sqlite-autoconf-dev
+BuildRequires : syntax-highlighting
+BuildRequires : syntax-highlighting-data
+BuildRequires : syntax-highlighting-dev
+BuildRequires : syntax-highlighting-lib
 BuildRequires : systemd
 BuildRequires : systemd-dev
+BuildRequires : texinfo
 BuildRequires : util-linux
 BuildRequires : util-linux-dev
 BuildRequires : util-linux-staticdev
+BuildRequires : valgrind
+BuildRequires : valgrind-dev
 BuildRequires : wayland
 BuildRequires : wayland-dev
 BuildRequires : weston
 BuildRequires : wmctrl
 BuildRequires : xauth
 BuildRequires : xclip
+BuildRequires : xdg-dbus-proxy
 BuildRequires : xdg-desktop-portal
+BuildRequires : xdg-desktop-portal-dev
 BuildRequires : xdg-desktop-portal-gtk
 BuildRequires : xdg-desktop-portal-kde
 BuildRequires : xdg-user-dirs
@@ -196,6 +410,7 @@ BuildRequires : xrandr
 BuildRequires : xrdb
 BuildRequires : xrdp
 BuildRequires : xrestop
+BuildRequires : xscreensaver
 BuildRequires : xsel
 BuildRequires : xset
 BuildRequires : xsetroot
@@ -205,6 +420,8 @@ BuildRequires : xwininfo
 BuildRequires : xz
 BuildRequires : xz-dev
 BuildRequires : xz-staticdev
+BuildRequires : yaml-cpp
+BuildRequires : yaml-cpp-dev
 BuildRequires : zlib
 BuildRequires : zlib-dev
 BuildRequires : zlib-staticdev
@@ -229,7 +446,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620974626
+export SOURCE_DATE_EPOCH=1620979385
 unset LD_AS_NEEDED
 mkdir -p clr-build
 pushd clr-build
@@ -314,7 +531,7 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 -DPULSEAUDIO:BOOL=ON \
 -DPULSEAUDIO_SHARED:BOOL=ON \
 -DLIBSAMPLERATE:BOOL=ON \
--DLIBSAMPLERATE_SHARED:BOOL=Off \
+-DLIBSAMPLERATE_SHARED:BOOL=OFF \
 -DVIDEO_OPENGL:BOOL=ON \
 -DVIDEO_OPENGLES:BOOL=ON \
 -DVIDEO_X11:BOOL=ON \
@@ -347,6 +564,10 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 -D3DNOW:BOOL=OFF \
 -DMMX:BOOL=OFF \
 -DSDL_TEST:BOOL=ON
+## make_prepend content
+sd "/usr/lib64/libsamplerate.a" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
+sd "\-lsamplerate" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
+## make_prepend end
 make  %{?_smp_mflags}  V=1 VERBOSE=1 V=1 VERBOSE=1
 ## ccache stats
 ccache -s
@@ -389,16 +610,13 @@ timeout 6 ./testvulkan || :
 timeout 6 ./testnative || :
 ./testmultiaudio || :
 ./checkkeys || :
-./loopwave || :
-./loopwavequeue || :
+timeout 6 ./loopwave || :
+timeout 6 ./loopwavequeue || :
 ./testaudioinfo || :
 ./testerror || :
 ./testfile || :
 ./testiconv || :
 ./testkeys || :
-./testloadso || :
-./testlocale || :
-./testlock || :
 ./testoverlay2 || :
 ./testplatform || :
 ./testsem || :
@@ -406,6 +624,7 @@ timeout 6 ./testnative || :
 ./testthread || :
 ./testtimer || :
 ./torturethread || :
+glxinfo ||:
 popd
 find . -type f,l -not -name '*.gcno' -not -name 'statuspgo*' -delete -print
 echo USED > statuspgo
@@ -426,7 +645,7 @@ export LDFLAGS="${LDFLAGS_USE}"
 -DPULSEAUDIO:BOOL=ON \
 -DPULSEAUDIO_SHARED:BOOL=ON \
 -DLIBSAMPLERATE:BOOL=ON \
--DLIBSAMPLERATE_SHARED:BOOL=Off \
+-DLIBSAMPLERATE_SHARED:BOOL=OFF \
 -DVIDEO_OPENGL:BOOL=ON \
 -DVIDEO_OPENGLES:BOOL=ON \
 -DVIDEO_X11:BOOL=ON \
@@ -459,6 +678,10 @@ export LDFLAGS="${LDFLAGS_USE}"
 -D3DNOW:BOOL=OFF \
 -DMMX:BOOL=OFF \
 -DSDL_TEST:BOOL=OFF
+## make_prepend content
+sd "/usr/lib64/libsamplerate.a" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
+sd "\-lsamplerate" "\-Wl,--whole-archive /usr/lib64/libsamplerate.a \-Wl,--no-whole-archive" $(fd -uu link.txt)
+## make_prepend end
 make  %{?_smp_mflags}  V=1 VERBOSE=1 V=1 VERBOSE=1
 ## ccache stats
 ccache -s
@@ -467,7 +690,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1620974626
+export SOURCE_DATE_EPOCH=1620979385
 rm -rf %{buildroot}
 pushd clr-build
 %make_install

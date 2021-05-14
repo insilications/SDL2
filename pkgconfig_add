@@ -5,13 +5,21 @@ alsa-topology
 dbus-1
 dri
 egl
+expat
 gbm
 gl
 glesv1_cm
 glesv2
+glib-2.0
+gmock
+gmock_main
+gtest
+gtest_main
 ibus-1.0
+ice
 libdrm
 libpulse-simple
+libsystemd
 libudev
 libunwind
 libunwind-coredump
@@ -21,6 +29,9 @@ libunwind-setjmp
 libusb-1.0
 osmesa
 samplerate
+sm
+systemd
+valgrind
 vulkan
 wayland-protocols
 x11
@@ -32,3 +43,4 @@ xinerama
 xkbcommon
 xrandr
 xscrnsaver
+zlib
