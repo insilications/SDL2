@@ -48,8 +48,6 @@ libsamplerate-staticdev32
 libunwind
 libunwind-dev
 libunwind-dev32
-libunwind-staticdev
-libunwind-staticdev32
 libusb
 libusb-dev
 libusb-dev32
@@ -87,6 +85,7 @@ mesa
 mesa-demos
 mesa-dev
 mesa-lib
+mesa-dev
 nvidia
 nvidia-dev
 nvidia-lib
@@ -97,6 +96,8 @@ pango-lib
 pcre-dev
 pcre-staticdev
 pixman-lib
+pixman-dev
+pixman-staticdev
 pkg-config
 pulseaudio
 pulseaudio-dev

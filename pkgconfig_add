@@ -1,29 +1,5 @@
 # This file contains additional pkgconfig build requirements that did
 # not get picked up automatically. One name per line, no whitespace.
-32alsa
-32dbus-1
-32dri
-32egl
-32gbm
-32gl
-32glesv1_cm
-32glesv2
-32libdrm
-32libpulse-simple
-32libudev
-32libusb-1.0
-32osmesa
-32samplerate
-32wayland-protocols
-32x11
-32xatracker
-32xcursor
-32xext
-32xi
-32xinerama
-32xkbcommon
-32xrandr
-32xscrnsaver
 alsa
 alsa-topology
 dbus-1

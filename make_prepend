@@ -1,0 +1,2 @@
+sd "/usr/lib64/libsamplerate.so" "-Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive" $(fd -uu link.txt)
+sd "-lsamplerate" "-Wl,--whole-archive /usr/lib64/libsamplerate.a -Wl,--no-whole-archive" $(fd -uu link.txt)
