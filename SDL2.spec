@@ -30,6 +30,7 @@ BuildRequires : alsa-lib-lib
 BuildRequires : alsa-plugins
 BuildRequires : alsa-plugins-lib
 BuildRequires : alsa-tools
+BuildRequires : alsa-ucm-conf
 BuildRequires : alsa-utils
 BuildRequires : binutils
 BuildRequires : binutils-dev
@@ -471,7 +472,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620986880
+export SOURCE_DATE_EPOCH=1620987636
 unset LD_AS_NEEDED
 mkdir -p clr-build
 pushd clr-build
@@ -649,7 +650,54 @@ timeout 6 ./loopwavequeue || :
 timeout 6 ./testoverlay2 || :
 ./testplatform || :
 ./testsem || :
-./testshape || :
+timeout 1 ./testshape shapes/trollface_32alpha.bmp || :
+timeout 1 ./testshape shapes/trollface_24.bmp || :
+timeout 1 ./testshape shapes/p16_shape24.bmp || :
+timeout 1 ./testshape shapes/p16_shape8.bmp || :
+timeout 1 ./testshape shapes/p16_shape1.bmp || :
+timeout 1 ./testshape shapes/p15_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p15_shape24.bmp || :
+timeout 1 ./testshape shapes/p15_shape8.bmp || :
+timeout 1 ./testshape shapes/p14_shape24.bmp || :
+timeout 1 ./testshape shapes/p14_shape8.bmp || :
+timeout 1 ./testshape shapes/p13_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p13_shape24.bmp || :
+timeout 1 ./testshape shapes/p13_shape8.bmp || :
+timeout 1 ./testshape shapes/p12_shape24.bmp || :
+timeout 1 ./testshape shapes/p12_shape8.bmp || :
+timeout 1 ./testshape shapes/p11_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p11_shape24.bmp || :
+timeout 1 ./testshape shapes/p11_shape8.bmp || :
+timeout 1 ./testshape shapes/p10_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p10_shape24.bmp || :
+timeout 1 ./testshape shapes/p10_shape8.bmp || :
+timeout 1 ./testshape shapes/p10_shape1.bmp || :
+timeout 1 ./testshape shapes/p09_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p09_shape24.bmp || :
+timeout 1 ./testshape shapes/p09_shape8.bmp || :
+timeout 1 ./testshape shapes/p08_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p08_shape24.bmp || :
+timeout 1 ./testshape shapes/p08_shape8.bmp || :
+timeout 1 ./testshape shapes/p07_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p07_shape24.bmp || :
+timeout 1 ./testshape shapes/p07_shape8.bmp || :
+timeout 1 ./testshape shapes/p06_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p06_shape24.bmp || :
+timeout 1 ./testshape shapes/p06_shape8.bmp || :
+timeout 1 ./testshape shapes/p06_shape1alpha.bmp || :
+timeout 1 ./testshape shapes/p05_shape8.bmp || :
+timeout 1 ./testshape shapes/p04_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p04_shape24.bmp || :
+timeout 1 ./testshape shapes/p04_shape8.bmp || :
+timeout 1 ./testshape shapes/p04_shape1.bmp || :
+timeout 1 ./testshape shapes/p03_shape24.bmp || :
+timeout 1 ./testshape shapes/p03_shape8.bmp || :
+timeout 1 ./testshape shapes/p02_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p02_shape24.bmp || :
+timeout 1 ./testshape shapes/p02_shape8.bmp || :
+timeout 1 ./testshape shapes/p01_shape32alpha.bmp || :
+timeout 1 ./testshape shapes/p01_shape24.bmp || :
+timeout 1 ./testshape shapes/p01_shape8.bmp || :
 ./testthread || :
 ./testtimer || :
 ./torturethread || :
@@ -718,7 +766,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1620986880
+export SOURCE_DATE_EPOCH=1620987636
 rm -rf %{buildroot}
 pushd clr-build
 %make_install

@@ -4,6 +4,7 @@ acl
 acl-dev
 acl-staticdev
 alsa-firmware
+alsa-ucm-conf
 alsa-lib-dev
 alsa-lib-lib
 alsa-plugins
