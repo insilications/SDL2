@@ -33,6 +33,7 @@ gbm
 gl
 glesv1_cm
 glesv2
+ibus-1.0
 libdrm
 libpulse-simple
 libudev
