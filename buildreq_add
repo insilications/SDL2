@@ -234,9 +234,6 @@ ninja
 not-ffmpeg
 not-ffmpeg-dev
 numlockx
-nvidia
-nvidia-dev
-nvidia-lib
 opencl-headers
 opencl-headers-dev
 openjpeg-dev
