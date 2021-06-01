@@ -31,9 +31,6 @@ ccache
 clazy
 cmake
 cppcheck
-cuda
-cuda-dev
-cuda-staticdev
 curl-dev
 dbus
 dbus-broker
